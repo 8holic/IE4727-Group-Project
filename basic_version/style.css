@@ -1,0 +1,29 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* Header & Top Navigation */
+header { background: #fff; padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 1000; }
+.container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+nav { }
+nav ul { display: flex; gap: 2rem; }
+nav a { color: #555; transition: color 0.3s; }
+nav a:hover { color: #e74c3c; }
+
+/* Hero Banner */
+.hero { height: 50vh; background: url('images/hero-banner.jpg') center/cover no-repeat; position: relative; }
+.overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+.cta-btn { display: inline-block; padding: 0.8rem 2rem; background: #e74c3c; color: #fff; border-radius: 5px; margin-top: 1rem; font-weight: bold; transition: background 0.3s; }
+.cta-btn:hover { background: #c0392b; }
+
+/* Table */
+.table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+.table tr { border-bottom: 1px solid #ddd; }
+.table td { padding: 1rem 0; vertical-align: top; }
+
+/* Floating Book Appointment Button */
+.floating-btn { position: fixed; bottom: 2rem; right: 2rem; background: #e74c3c; color: #fff; padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3); transition: background 0.3s; }
+.floating-btn:hover { background: #c0392b; }

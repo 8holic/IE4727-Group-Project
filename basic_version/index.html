@@ -1,9 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Opening</title>
-<meta charset="utf-8">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Clinic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- nav -->
+  <header>
+    <div class="container">
+      <div class="logo">Logo</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="booking.html">Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-</style>
+  <!-- hero banner -->
+  <section class="hero" style="background:url('assets/JnB Clinic.png') center/cover no-repeat;">
+    <div class="overlay">
+      <h1>Quality Healthcare For You and Your Family</h1>
+      <a class="cta-btn" href="#booking-form">Book Appointment</a>
+    </div>
+  </section>
+
+  <!-- body Text -->
+  <section class="doctors" id="doctors">
+    <h2>Meet Our Doctors</h2>
+    <table class="table">
+      <tr>
+        <td><img src="images/doctor1.jpg" alt="Doctor 1" width="150" style="border-radius:50%; margin-bottom:1rem;"></td>
+        <td>
+          <h3>Dr. John Smith</h3>
+          <p>General Practitioner</p>
+          <p>MBBS, MRCP</p>
+          <p>Mon-Fri: 9am - 5pm</p>
+        </td>
+      </tr>
+      <tr>
+        <td><img src="images/doctor2.jpg" alt="Doctor 2" width="150" style="border-radius:50%; margin-bottom:1rem;"></td>
+        <td>
+          <h3>Dr. Jane Doe</h3>
+          <p>Pediatrician</p>
+          <p>MD, FAAP</p>
+          <p>Tue-Sat: 8am - 4pm</p>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- FLOATING "BOOK APPOINTMENT" BUTTON -->
+  <a class="floating-btn" href="#booking-form">Book Appointment</a>
+
+</body>
+</html>
