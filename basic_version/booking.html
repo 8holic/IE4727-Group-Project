@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JnB Clinic</title>
+  <title>Book an Appointment — JnB Clinic</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,19 +21,54 @@
     <a class="book-now" href="booking.html">Book An Appointment</a>
   </nav>
 
-    <section class="hero">
+  <section class="hero">
     <img src="assets/indexbanner.jpg" alt="JnB Clinic">
-    
     <div class="hero-text">
-        <h1>Ready to book?</h1>
-        <p>Your health is our priority.</p>
+      <h1>Ready to book?</h1>
+      <p>Your health is our priority.</p>
     </div>
-    </section>
+  </section>
 
-    <main>
-      Insert your content here Bryan
-    </main>
+  <main class="container">
+    <form id="bookingForm" class="booking-form">
 
+      <h2>Book an Appointment</h2>
+
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+      <br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <br>
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone">
+      <br>
+
+      <label for="location">Location:</label>
+      <select id="location" name="location" required>
+        <option value="Jurong West Street 65">Jurong West Street 65</option>
+        <option value="Jurong West Street 64">Jurong West Street 64</option>
+      </select>
+      <br>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+      <br>
+
+      <label for="timeSlot">Time:</label>
+      <select id="timeSlot" name="start" required>
+        <option value="">— pick a date first —</option>
+      </select>
+      <br>
+
+      <button type="submit">Confirm Booking</button>
+
+      <p id="msg" class="form-msg"></p>
+    </form>
+  </main>
+
+  <script src="booking.js"></script>
 </body>
-
 </html>
