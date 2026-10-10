@@ -43,7 +43,7 @@
   color: red;
 }
 
-.nav .book-now {
+.book-now {
   background-color: red;
   color: white;
   padding: 0.6rem 1.2rem;
@@ -209,3 +209,74 @@
   background: #f8d7da;
   color: #721c24;
 }
+
+
+.container section {
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #dce3f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.container section h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 30px;
+    text-align: center;
+}
+
+.container section > p:first-of-type {
+    text-align: center;
+    color: #666;
+}
+
+.container section img {
+    display: block;
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+}
+
+.container section h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+}
+
+.container section p {
+    line-height: 1.8;
+}
+
+.container section a {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background-color: #c94c4c;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.container section a:hover {
+    background-color: #a93e3e;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+    .container section {
+        padding: 1.25rem;
+        margin: 1rem auto;
+    }
+
+    .container section h2 {
+        font-size: 25px;
+    }
+}
+
