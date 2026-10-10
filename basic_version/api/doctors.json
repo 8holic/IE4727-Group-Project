@@ -1,0 +1,8 @@
+{
+  "hours": { "start": "09:00", "end": "17:40" },
+  "closed": [7],
+  "doctors": [
+    { "name": "Dr Bryan", "label": "Dr Bryan (Mon-Fri)", "days": [1, 2, 3, 4, 5] },
+    { "name": "Dr Javier", "label": "Dr Javier (Tue-Sat)", "days": [2, 3, 4, 5, 6] }
+  ]
+}

@@ -39,39 +39,38 @@
   <!-- Floating Booking Tab -->
   <a class="book-tab" href="booking.html">Book Now</a>
 
-  <main class="container">
-    <form id="bookingForm" class="booking-form">
+  <main class="page">
+    <form id="bookingForm" class="booking-form" novalidate>
 
       <h2>Book an Appointment</h2>
 
       <label for="name">Full Name:</label>
       <input type="text" id="name" name="name" required>
-      <br>
+      <p class="field-error" id="err-name"></p>
 
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
-      <br>
+      <p class="field-error" id="err-email"></p>
 
       <label for="phone">Phone:</label>
       <input type="tel" id="phone" name="phone">
-      <br>
+      <p class="field-error" id="err-phone"></p>
 
-      <label for="location">Location:</label>
-      <select id="location" name="location" required>
-        <option value="Jurong West Street 65">Jurong West Street 65</option>
-        <option value="Jurong West Street 64">Jurong West Street 64</option>
+      <label for="doctor">Doctor:</label>
+      <select id="doctor" name="doctor" required>
+        <option value="">— choose a doctor —</option>
       </select>
-      <br>
+      <p class="field-error" id="err-doctor"></p>
 
       <label for="date">Date:</label>
       <input type="date" id="date" name="date" required>
-      <br>
+      <p class="field-error" id="err-date"></p>
 
       <label for="timeSlot">Time:</label>
       <select id="timeSlot" name="start" required>
         <option value="">— pick a date first —</option>
       </select>
-      <br>
+      <p class="field-error" id="err-timeSlot"></p>
 
       <button type="submit">Confirm Booking</button>
 

@@ -1,16 +1,16 @@
-﻿/* =========================================================
-   style.css - shared stylesheet for all J&B Family Clinic pages
-   ========================================================= */
+﻿/* style.css - shared stylesheet for all J&B Family Clinic pages */
 
 :root {
   --brand: #26776f;
   --brand-dark: #174d50;
   --ink: #183b38;
+  --text: #27363a;
   --body: #617073;
   --bg: #f6f9f8;
   --card: #ffffff;
-  --border: #e0e8e6;
   --soft: #eef5f3;
+  --border: #e0e8e6;
+  --chip: #e1f0ed;
   --cta: #c94c4c;
   --cta-dark: #a93e3e;
 }
@@ -19,21 +19,15 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: var(--bg);
-  color: #27363a;
+  color: var(--text);
 }
 
-/* ---------- Header / navigation ---------- */
+/* Header / navigation */
 .top-header {
-  width: 100%;
-  min-height: 82px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,7 +40,6 @@ body {
 .logo-link {
   display: inline-flex;
   align-items: center;
-  margin-right: auto;
   text-decoration: none;
 }
 
@@ -56,10 +49,6 @@ body {
   height: 62px;
   object-fit: contain;
   object-position: left center;
-}
-
-.top-nav {
-  margin-left: auto;
 }
 
 .top-nav ul {
@@ -74,7 +63,7 @@ body {
 .top-nav a {
   display: block;
   padding: 9px 11px;
-  color: #28575a;
+  color: var(--brand-dark);
   text-decoration: none;
   font-size: 0.98rem;
   font-weight: 600;
@@ -85,11 +74,11 @@ body {
 
 .top-nav a:hover,
 .top-nav a.active {
-  background: #eaf4f2;
+  background: var(--soft);
   color: var(--brand-dark);
 }
 
-/* ---------- Booking calls to action ---------- */
+/* Booking calls to action */
 .book-now {
   display: inline-block;
   padding: 0.6rem 1.15rem;
@@ -128,14 +117,13 @@ body {
   color: #fff;
 }
 
-/* ---------- Hero ---------- */
+/* Hero */
 .clinic-hero {
   position: relative;
   height: 300px;
   background-color: var(--brand-dark);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
 .clinic-hero--home {
@@ -182,7 +170,7 @@ body {
   font-size: 1rem;
 }
 
-/* ---------- Page shell / layout ---------- */
+/* Page shell */
 .page {
   padding: 52px 42px 95px;
 }
@@ -197,7 +185,7 @@ body {
   padding-top: 52px;
 }
 
-/* ---------- Shared content blocks ---------- */
+/* Shared content blocks */
 .info-card {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -229,7 +217,7 @@ body {
 
 .eyebrow {
   margin: 0 0 9px;
-  color: #28786f;
+  color: var(--brand);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -250,18 +238,18 @@ body {
 
 .section-heading > p:last-child {
   margin: 0;
-  color: #68777b;
+  color: var(--body);
 }
 
 .history {
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid #e2e9e7;
+  border-top: 1px solid var(--border);
 }
 
 .history h2 {
   margin: 0 0 7px;
-  color: #1c5557;
+  color: var(--brand-dark);
   font-size: 1.3rem;
 }
 
@@ -274,7 +262,7 @@ body {
 .media-frame {
   overflow: hidden;
   border-radius: 14px;
-  background: #e8eeed;
+  background: var(--soft);
   box-shadow: 0 7px 20px rgba(28, 70, 72, 0.10);
 }
 
@@ -304,7 +292,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* ---------- Feature tiles (3-column) ---------- */
+/* Feature tiles */
 .tile-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -317,7 +305,7 @@ body {
   gap: 13px;
   padding: 18px;
   background: var(--soft);
-  border: 1px solid #dce9e6;
+  border: 1px solid var(--border);
   border-radius: 12px;
 }
 
@@ -335,18 +323,18 @@ body {
 
 .tile h3 {
   margin: 0 0 4px;
-  color: #1d5152;
+  color: var(--brand-dark);
   font-size: 1rem;
 }
 
 .tile p {
   margin: 0;
-  color: #68777a;
+  color: var(--body);
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-/* ---------- Card grids (services, doctors, process) ---------- */
+/* Card grids */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -360,7 +348,7 @@ body {
 .card {
   padding: 22px;
   background: var(--card);
-  border: 1px solid #dde8e5;
+  border: 1px solid var(--border);
   border-radius: 13px;
   box-shadow: 0 6px 18px rgba(26, 72, 67, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -379,7 +367,7 @@ body {
 
 .card p {
   margin: 0;
-  color: #657270;
+  color: var(--body);
   line-height: 1.58;
 }
 
@@ -391,12 +379,12 @@ body {
   justify-content: center;
   margin-bottom: 14px;
   border-radius: 9px;
-  background: #e1f0ed;
-  color: #28786f;
+  background: var(--chip);
+  color: var(--brand);
   font-weight: 700;
 }
 
-/* ---------- Doctor cards ---------- */
+/* Doctor cards */
 .doctor-card {
   display: flex;
   gap: 17px;
@@ -414,15 +402,15 @@ body {
   display: grid;
   place-items: center;
   border-radius: 13px;
-  background: #dcefed;
-  color: #226a64;
+  background: var(--chip);
+  color: var(--brand);
   font-size: 1.12rem;
   font-weight: 700;
 }
 
 .doctor-card h3 {
   margin: 0;
-  color: #173f42;
+  color: var(--ink);
   font-size: 1.18rem;
 }
 
@@ -434,7 +422,7 @@ body {
 }
 
 .doctor-card p {
-  color: #667477;
+  color: var(--body);
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -442,12 +430,12 @@ body {
 .hours {
   margin-top: 13px;
   padding-top: 11px;
-  border-top: 1px solid #e4ebea;
-  color: #526366;
+  border-top: 1px solid var(--border);
+  color: var(--body);
   font-size: 0.87rem;
 }
 
-/* ---------- Numbered process steps ---------- */
+/* Process steps */
 .step {
   padding: 22px;
   text-align: center;
@@ -463,7 +451,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #28786f;
+  background: var(--brand);
   color: #fff;
   font-weight: 700;
 }
@@ -476,80 +464,15 @@ body {
 
 .step p {
   margin: 0;
-  color: #657270;
+  color: var(--body);
   line-height: 1.55;
 }
 
-/* =========================================================
-   Home / location content
-   ========================================================= */
-.container {
-  display: flex;
-  justify-content: center;
-  margin: 1rem;
-}
-
-.container section {
-  width: 100%;
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: var(--card);
-  border: 1px solid #dce3f0;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.container section h2 {
-  margin-top: 0;
-  color: #333;
-  font-size: 30px;
-  text-align: center;
-}
-
-.container section > p:first-of-type {
-  text-align: center;
-  color: #666;
-}
-
-.container section img {
-  display: block;
-  width: 100%;
-  max-height: 380px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin: 1.5rem 0;
-}
-
-.container section h3 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 0.5rem;
-}
-
-.container section p {
-  line-height: 1.8;
-}
-
-.container section a {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  background: var(--cta);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-
-.container section a:hover {
-  background: var(--cta-dark);
-}
-
-/* ---------- Booking form ---------- */
+/* Booking form */
 .booking-form {
   width: 100%;
   max-width: 480px;
-  margin: 2rem 0;
+  margin: 2rem auto;
   padding: 2rem;
   border: 2px solid var(--brand);
   border-radius: 12px;
@@ -561,14 +484,14 @@ body {
 
 .booking-form h2 {
   margin: 0 0 1rem;
-  color: #333;
+  color: var(--text);
 }
 
 .booking-form label {
   display: inline-block;
   width: 110px;
   font-weight: 600;
-  color: #333;
+  color: var(--text);
   vertical-align: middle;
 }
 
@@ -581,7 +504,6 @@ body {
   border-radius: 6px;
   font-family: inherit;
   vertical-align: middle;
-  box-sizing: border-box;
 }
 
 .booking-form input:focus,
@@ -631,7 +553,14 @@ body {
   color: #721c24;
 }
 
-/* ---------- Responsive ---------- */
+.field-error {
+  min-height: 1.05rem;
+  margin: 0.2rem 0 0 110px;
+  color: var(--cta);
+  font-size: 0.85rem;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .info-card,
   .card-grid--2 {
@@ -683,14 +612,5 @@ body {
 
   .doctor-card {
     flex-direction: column;
-  }
-
-  .container section {
-    padding: 1.25rem;
-    margin: 1rem auto;
-  }
-
-  .container section h2 {
-    font-size: 25px;
   }
 }
