@@ -3,105 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JnB Clinic - Home</title>
+    <title>J&amp;B Family Clinic - Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="segment nav">
-        <h1>Header Logo</h1>
-
-        <div class="links">
-            <p>Home</p>
-            <a href="about.html">About Us</a>
-            <a href="service.html">Services</a>
-            <a href="location.html">Location</a>
-        </div>
-
-        <a class="book-now" href="booking.html">
-            Book An Appointment
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+            <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
         </a>
-    </nav>
+
+        <nav class="top-nav" aria-label="Main navigation">
+            <ul>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="location.html">Location</a></li>
+                <li><a class="book-now" href="booking.html">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- Hero Banner -->
-    <section class="hero">
-        <img src="assets/indexbanner.jpg" alt="JnB Clinic">
-
-        <div class="hero-text">
-            <h1>Your Health is Our Priority</h1>
-            <p>A healthier tomorrow.</p>
-            <a class="book-now" href="booking.html">Book An Appointment</a>
+    <section class="clinic-hero clinic-hero--home" aria-label="Welcome to J&B Family Clinic">
+        <div class="clinic-hero-overlay">
+            <div class="clinic-hero-text">
+                <p>J&amp;B FAMILY CLINIC</p>
+                <h1>Your Health is Our Priority</h1>
+                <span>A healthier tomorrow.</span>
+            </div>
         </div>
     </section>
 
     <!-- Floating Booking Tab -->
     <a class="book-tab" href="booking.html">Book Now</a>
 
-    <!-- Service Highlights -->
-    <main>
-        <div class="container">
-            <section>
-                <h2>Our Services</h2>
+    <main class="page">
+
+        <!-- WELCOME -->
+        <section class="wrap info-card">
+            <div class="section-copy">
+                <p class="eyebrow">WELCOME</p>
+                <h1>Quality Healthcare for You and Your Family</h1>
+                <p>
+                    At J&amp;B Family Clinic, we believe that good health leads to a better
+                    life. Our team is committed to providing friendly, reliable and
+                    personalised care for every patient.
+                </p>
+                <a class="book-now" href="booking.html">Book An Appointment</a>
+            </div>
+
+            <div class="media-frame">
+                <img src="assets/ai_clinic_photo1.jpg" alt="Reception at J&B Family Clinic">
+                <div class="media-caption">
+                    <strong>J&amp;B Family Clinic</strong>
+                    <span>A clean, safe and welcoming environment</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="wrap section">
+            <div class="section-heading">
+                <p class="eyebrow">OUR SERVICES</p>
+                <h2>What we offer</h2>
                 <p>We offer a range of healthcare services to keep you and your family healthy.</p>
+            </div>
 
-                <div>
+            <div class="card-grid">
+                <article class="card">
+                    <div class="badge">01</div>
                     <h3>General Checkups</h3>
-                    <p>Keep track of your health with regular checkups.</p>
-                </div>
+                    <p>Keep track of your health with regular checkups and preventive care.</p>
+                </article>
 
-                <div>
+                <article class="card">
+                    <div class="badge">02</div>
                     <h3>Preventive Care</h3>
-                    <p>Stay healthy and help prevent future illness.</p>
-                </div>
+                    <p>Stay healthy and help prevent future illness with practical advice.</p>
+                </article>
 
-                <div>
+                <article class="card">
+                    <div class="badge">03</div>
                     <h3>Expert Professionals</h3>
                     <p>Receive care from experienced and caring medical staff.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section class="wrap section">
+            <div class="section-heading">
+                <p class="eyebrow">WHY CHOOSE US</p>
+                <h2>Care you can rely on</h2>
+            </div>
+
+            <div class="tile-grid">
+                <div class="tile">
+                    <span>01</span>
+                    <div>
+                        <h3>Safe and Comfortable</h3>
+                        <p>A clean, safe and welcoming environment for every patient.</p>
+                    </div>
                 </div>
 
-                <div>
-                    <h3>Safe and Comfortable</h3>
-                    <p>A clean, safe and welcoming environment for every patient.</p>
+                <div class="tile">
+                    <span>02</span>
+                    <div>
+                        <h3>Friendly and Personalised</h3>
+                        <p>We take the time to understand every patient we see.</p>
+                    </div>
                 </div>
 
-                <!-- Added button to full services page -->
-                <p>
-                    <a href="service.html">View All Services</a>
-                </p>
-            </section>
-        </div>
-
-        <!-- About JnB Clinic -->
-        <div class="container">
-            <section>
-                <img
-                    src="assets/ai_clinic_photo1.jpg"
-                    alt="JnB Clinic reception"
-                    width="480"
-                >
-
-                <div>
-                    <p>ABOUT JnB CLINIC</p>
-
-                    <h2>Quality Healthcare for You and Your Family</h2>
-
-                    <p>
-                        At JnB Clinic, we believe that good health leads to a
-                        better life. Our team is committed to providing friendly,
-                        reliable and personalised care for every patient.
-                    </p>
-
-                    <a href="about.html">Learn More About Us</a>
-
-                    <p>
-                        <a href="booking.html">Book An Appointment</a>
-                    </p>
+                <div class="tile">
+                    <span>03</span>
+                    <div>
+                        <h3>Reliable Care</h3>
+                        <p>Dependable healthcare for you and your family, every visit.</p>
+                    </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
     </main>
-
 
 </body>
 </html>

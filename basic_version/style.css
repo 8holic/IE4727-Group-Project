@@ -1,92 +1,110 @@
-﻿body {
-  display: flex;
-  flex-direction: column;
-  min-height: 2000px;
-  margin:0;
+﻿/* =========================================================
+   style.css - shared stylesheet for all J&B Family Clinic pages
+   ========================================================= */
+
+:root {
+  --brand: #26776f;
+  --brand-dark: #174d50;
+  --ink: #183b38;
+  --body: #617073;
+  --bg: #f6f9f8;
+  --card: #ffffff;
+  --border: #e0e8e6;
+  --soft: #eef5f3;
+  --cta: #c94c4c;
+  --cta-dark: #a93e3e;
 }
 
-.segment {
-  flex: none;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: #27363a;
+}
+
+/* ---------- Header / navigation ---------- */
+.top-header {
+  width: 100%;
+  min-height: 82px;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-}
-.nav {
   justify-content: space-between;
-  border-bottom: 2px solid black;
-  background-color: #96ade0;
+  gap: 28px;
+  padding: 10px 26px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
 }
 
-.nav .links {
-  display: flex;
-  gap: 2rem;
+.logo-link {
+  display: inline-flex;
   align-items: center;
-  font-size: 32px;
-}
-
-.nav a {
-  color: grey;
+  margin-right: auto;
   text-decoration: none;
 }
-.links p {
-  color: red;
+
+.clinic-logo {
+  display: block;
+  width: 185px;
+  height: 62px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.top-nav {
+  margin-left: auto;
+}
+
+.top-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-
-.nav a:visited {
-  color: grey;
+.top-nav a {
+  display: block;
+  padding: 9px 11px;
+  color: #28575a;
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 7px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.nav a:hover {
-  color: red;
+.top-nav a:hover,
+.top-nav a.active {
+  background: #eaf4f2;
+  color: var(--brand-dark);
 }
 
+/* ---------- Booking calls to action ---------- */
 .book-now {
-  background-color: red;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  font-size:24px;
+  display: inline-block;
+  padding: 0.6rem 1.15rem;
   border-radius: 999px;
+  background: var(--cta);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
 }
 
-.nav .book-now:visited {
-  color: white;
-}
-
-.nav .book-now:hover {
-  color: white;
-}
-
-
-.hero {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
-
-.hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.hero-text {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
+.book-now:hover {
+  background: var(--cta-dark);
+  color: #fff;
 }
 
 .book-tab {
@@ -94,54 +112,461 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-
-  background-color: #c94c4c;
-  color: white;
+  z-index: 1000;
   padding: 1rem 0.8rem;
-
-  text-decoration: none;
   border-radius: 10px 0 0 10px;
-
+  background: var(--cta);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-
-  z-index: 1000;
 }
 
 .book-tab:hover {
-  background-color: #a93e3e;
-  color: white;
+  background: var(--cta-dark);
+  color: #fff;
 }
 
-.container{
+/* ---------- Hero ---------- */
+.clinic-hero {
+  position: relative;
+  height: 300px;
+  background-color: var(--brand-dark);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.clinic-hero--home {
+  background-image: url("assets/indexbanner.jpg");
+}
+
+.clinic-hero--clinic {
+  background-image: url("assets/JnB Clinic.png");
+}
+
+.clinic-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(16, 39, 42, 0.48);
+}
+
+.clinic-hero-text {
+  max-width: 850px;
+  text-align: center;
+  color: #fff;
+}
+
+.clinic-hero-text p {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.clinic-hero-text h1 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.12;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+.clinic-hero-text span {
+  color: #eef7f6;
+  font-size: 1rem;
+}
+
+/* ---------- Page shell / layout ---------- */
+.page {
+  padding: 52px 42px 95px;
+}
+
+.wrap {
+  width: min(1050px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  padding-top: 52px;
+}
+
+/* ---------- Shared content blocks ---------- */
+.info-card {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 36px;
+  align-items: center;
+  padding: 34px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(40, 80, 76, 0.07);
+}
+
+.section-copy h1 {
+  margin: 0 0 15px;
+  color: var(--ink);
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 1.12;
+}
+
+.section-copy p {
+  margin: 0;
+  color: var(--body);
+  line-height: 1.65;
+}
+
+.section-copy .book-now {
+  margin-top: 22px;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  color: #28786f;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  max-width: 680px;
+  margin: 0 auto 26px;
+  text-align: center;
+}
+
+.section-heading h2 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 2rem;
+}
+
+.section-heading > p:last-child {
+  margin: 0;
+  color: #68777b;
+}
+
+.history {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e9e7;
+}
+
+.history h2 {
+  margin: 0 0 7px;
+  color: #1c5557;
+  font-size: 1.3rem;
+}
+
+.history p {
+  margin: 0;
+  color: var(--body);
+  line-height: 1.65;
+}
+
+.media-frame {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #e8eeed;
+  box-shadow: 0 7px 20px rgba(28, 70, 72, 0.10);
+}
+
+.media-frame img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.media-caption {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+.media-caption strong {
+  font-size: 1rem;
+}
+
+.media-caption span {
+  margin-top: 2px;
+  color: #dcebea;
+  font-size: 0.85rem;
+}
+
+/* ---------- Feature tiles (3-column) ---------- */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-top: 24px;
+}
+
+.tile {
+  display: flex;
+  gap: 13px;
+  padding: 18px;
+  background: var(--soft);
+  border: 1px solid #dce9e6;
+  border-radius: 12px;
+}
+
+.tile > span {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tile h3 {
+  margin: 0 0 4px;
+  color: #1d5152;
+  font-size: 1rem;
+}
+
+.tile p {
+  margin: 0;
+  color: #68777a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---------- Card grids (services, doctors, process) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.card-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid #dde8e5;
+  border-radius: 13px;
+  box-shadow: 0 6px 18px rgba(26, 72, 67, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 23px rgba(26, 72, 67, 0.10);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 1.07rem;
+}
+
+.card p {
+  margin: 0;
+  color: #657270;
+  line-height: 1.58;
+}
+
+.badge {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 9px;
+  background: #e1f0ed;
+  color: #28786f;
+  font-weight: 700;
+}
+
+/* ---------- Doctor cards ---------- */
+.doctor-card {
+  display: flex;
+  gap: 17px;
+  padding: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 7px 19px rgba(40, 80, 76, 0.06);
+}
+
+.avatar {
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #dcefed;
+  color: #226a64;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.doctor-card h3 {
+  margin: 0;
+  color: #173f42;
+  font-size: 1.18rem;
+}
+
+.role {
+  margin: 2px 0 9px;
+  color: var(--brand);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.doctor-card p {
+  color: #667477;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.hours {
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid #e4ebea;
+  color: #526366;
+  font-size: 0.87rem;
+}
+
+/* ---------- Numbered process steps ---------- */
+.step {
+  padding: 22px;
+  text-align: center;
+  background: var(--soft);
+  border-radius: 12px;
+}
+
+.step span {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #28786f;
+  color: #fff;
+  font-weight: 700;
+}
+
+.step h3 {
+  margin: 0 0 7px;
+  color: var(--ink);
+  font-size: 1.04rem;
+}
+
+.step p {
+  margin: 0;
+  color: #657270;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   Home / location content
+   ========================================================= */
+.container {
   display: flex;
   justify-content: center;
   margin: 1rem;
 }
 
-/* FOR BOOKING */
-/* ---- Booking form ---- */
+.container section {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--card);
+  border: 1px solid #dce3f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.container section h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 30px;
+  text-align: center;
+}
+
+.container section > p:first-of-type {
+  text-align: center;
+  color: #666;
+}
+
+.container section img {
+  display: block;
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+
+.container section h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.container section p {
+  line-height: 1.8;
+}
+
+.container section a {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  background: var(--cta);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.container section a:hover {
+  background: var(--cta-dark);
+}
+
+/* ---------- Booking form ---------- */
 .booking-form {
   width: 100%;
   max-width: 480px;
   margin: 2rem 0;
   padding: 2rem;
-  border: 2px solid #96ade0;      /* the border you asked for */
+  border: 2px solid var(--brand);
   border-radius: 12px;
   background: #fafafa;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   font-size: 1rem;
   line-height: 1.6;
 }
 
 .booking-form h2 {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   color: #333;
 }
 
 .booking-form label {
   display: inline-block;
-  width: 110px;                 /* keeps all labels aligned */
+  width: 110px;
   font-weight: 600;
   color: #333;
   vertical-align: middle;
@@ -149,7 +574,7 @@
 
 .booking-form input,
 .booking-form select {
-  width: calc(100% - 130px);    /* fill remaining space on the line */
+  width: calc(100% - 130px);
   padding: 0.45rem 0.6rem;
   font-size: 1rem;
   border: 1px solid #bbb;
@@ -162,12 +587,8 @@
 .booking-form input:focus,
 .booking-form select:focus {
   outline: none;
-  border-color: #96ade0;
-  box-shadow: 0 0 0 3px rgba(150,173,224,0.3);
-}
-
-.booking-form br {
-  line-height: 1.8;             /* spacing between rows */
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(38, 119, 111, 0.25);
 }
 
 .booking-form button {
@@ -176,8 +597,8 @@
   padding: 0.7rem 1.4rem;
   font-size: 1.05rem;
   font-weight: 700;
-  color: white;
-  background-color: #c94c4c;
+  color: #fff;
+  background: var(--cta);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -185,7 +606,7 @@
 }
 
 .booking-form button:hover {
-  background-color: #a93e3e;
+  background: var(--cta-dark);
 }
 
 .form-msg {
@@ -197,7 +618,7 @@
 }
 
 .form-msg:empty {
-  display: none;                /* hide the empty <p> so it doesn't add space */
+  display: none;
 }
 
 .form-msg.success {
@@ -210,73 +631,66 @@
   color: #721c24;
 }
 
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .info-card,
+  .card-grid--2 {
+    grid-template-columns: 1fr;
+  }
 
-.container section {
-    width: 100%;
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: white;
-    border: 1px solid #dce3f0;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
+  .tile-grid,
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.container section h2 {
-    margin-top: 0;
-    color: #333;
-    font-size: 30px;
-    text-align: center;
+@media (max-width: 640px) {
+  .top-header {
+    gap: 14px;
+    padding: 8px 12px;
+  }
+
+  .clinic-logo {
+    width: 120px;
+    height: 44px;
+  }
+
+  .top-nav {
+    overflow-x: auto;
+  }
+
+  .top-nav a {
+    padding: 7px 8px;
+    font-size: 0.82rem;
+  }
+
+  .clinic-hero {
+    height: 250px;
+  }
+
+  .page {
+    padding: 28px 16px 90px;
+  }
+
+  .info-card {
+    padding: 24px 20px;
+  }
+
+  .tile-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-card {
+    flex-direction: column;
+  }
+
+  .container section {
+    padding: 1.25rem;
+    margin: 1rem auto;
+  }
+
+  .container section h2 {
+    font-size: 25px;
+  }
 }
-
-.container section > p:first-of-type {
-    text-align: center;
-    color: #666;
-}
-
-.container section img {
-    display: block;
-    width: 100%;
-    max-height: 380px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin: 1.5rem 0;
-}
-
-.container section h3 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 0.5rem;
-}
-
-.container section p {
-    line-height: 1.8;
-}
-
-.container section a {
-    display: inline-block;
-    padding: 0.75rem 1.25rem;
-    background-color: #c94c4c;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.2s ease;
-}
-
-.container section a:hover {
-    background-color: #a93e3e;
-}
-
-/* Small screens */
-@media (max-width: 600px) {
-    .container section {
-        padding: 1.25rem;
-        margin: 1rem auto;
-    }
-
-    .container section h2 {
-        font-size: 25px;
-    }
-}
-

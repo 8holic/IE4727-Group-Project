@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | J&amp;B Family Clinic</title>
-  
-  <link rel="stylesheet" href="pages.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="project-page">
+<body>
 
   <!-- TOP HEADER: logo left, navigation right -->
   <header class="top-header">
@@ -18,16 +17,16 @@
     <nav class="top-nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a class="active" href="aboutus.html">About Us</a></li>
+        <li><a class="active" href="about.html">About Us</a></li>
         <li><a href="service.html">Services</a></li>
         <li><a href="location.html">Location</a></li>
-        <li><a class="book-nav" href="booking.html">Book Now</a></li>
+        <li><a class="book-now" href="booking.html">Book Now</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- HERO: keeps the older background-banner idea, but uses clean CSS -->
-  <section class="clinic-hero" aria-label="J&B Family Clinic introduction">
+  <!-- HERO -->
+  <section class="clinic-hero clinic-hero--clinic" aria-label="J&B Family Clinic introduction">
     <div class="clinic-hero-overlay">
       <div class="clinic-hero-text">
         <p>J&amp;B FAMILY CLINIC</p>
@@ -37,20 +36,20 @@
     </div>
   </section>
 
-  <main class="page-content about-v2">
+  <main class="page">
 
     <!-- CLINIC HISTORY / ABOUT -->
-    <section class="about-v2-intro">
-      <div class="about-v2-copy">
-        <p class="about-v2-label">ABOUT US</p>
+    <section class="wrap info-card">
+      <div class="section-copy">
+        <p class="eyebrow">ABOUT US</p>
         <h1>Care you can feel comfortable coming back to.</h1>
-        <p class="about-v2-lead">
+        <p>
           J&amp;B Family Clinic provides convenient and dependable primary healthcare
           for individuals and families. We focus on clear communication, practical
           medical advice and continuity of care.
         </p>
 
-        <div class="about-v2-history">
+        <div class="history">
           <h2>Our Clinic</h2>
           <p>
             J&amp;B Family Clinic was established to make everyday healthcare simple
@@ -61,9 +60,9 @@
         </div>
       </div>
 
-      <div class="about-v2-image-wrap">
+      <div class="media-frame">
         <img src="assets/JnB Clinic.png" alt="Interior of J&B Family Clinic">
-        <div class="about-v2-image-caption">
+        <div class="media-caption">
           <strong>J&amp;B Family Clinic</strong>
           <span>Comfortable care for every stage of life</span>
         </div>
@@ -71,8 +70,8 @@
     </section>
 
     <!-- VALUES -->
-    <section class="about-v2-values" aria-label="Our values">
-      <div class="about-v2-value">
+    <section class="wrap tile-grid" aria-label="Our values">
+      <div class="tile">
         <span>01</span>
         <div>
           <h3>Patient-centred</h3>
@@ -80,7 +79,7 @@
         </div>
       </div>
 
-      <div class="about-v2-value">
+      <div class="tile">
         <span>02</span>
         <div>
           <h3>Clear communication</h3>
@@ -88,7 +87,7 @@
         </div>
       </div>
 
-      <div class="about-v2-value">
+      <div class="tile">
         <span>03</span>
         <div>
           <h3>Continuity of care</h3>
@@ -97,38 +96,38 @@
       </div>
     </section>
 
-    <!-- DOCTORS: modern card layout instead of using a table for page layout -->
-    <section class="about-v2-doctors">
-      <div class="about-v2-heading">
-        <p class="about-v2-label">OUR MEDICAL TEAM</p>
+    <!-- DOCTORS -->
+    <section class="wrap section">
+      <div class="section-heading">
+        <p class="eyebrow">OUR MEDICAL TEAM</p>
         <h2>Meet our doctors</h2>
         <p>Get to know the doctors available for consultation at J&amp;B Family Clinic.</p>
       </div>
 
-      <div class="about-v2-doctor-grid">
-        <article class="about-v2-doctor-card">
-          <div class="about-v2-doctor-avatar">JT</div>
-          <div class="about-v2-doctor-content">
+      <div class="card-grid card-grid--2">
+        <article class="doctor-card">
+          <div class="avatar">JT</div>
+          <div class="doctor-content">
             <h3>Dr Jonathan Tan</h3>
-            <p class="about-v2-role">General Practitioner</p>
+            <p class="role">General Practitioner</p>
             <p>
               Dr Tan has an interest in family medicine, preventive healthcare and
               the management of common acute and chronic conditions.
             </p>
-            <p class="about-v2-hours"><strong>Consultation:</strong> Mon-Fri, 9:00 AM-5:00 PM</p>
+            <p class="hours"><strong>Consultation:</strong> Mon-Fri, 9:00 AM-5:00 PM</p>
           </div>
         </article>
 
-        <article class="about-v2-doctor-card">
-          <div class="about-v2-doctor-avatar">BL</div>
-          <div class="about-v2-doctor-content">
+        <article class="doctor-card">
+          <div class="avatar">BL</div>
+          <div class="doctor-content">
             <h3>Dr Brenda Lim</h3>
-            <p class="about-v2-role">Family Physician</p>
+            <p class="role">Family Physician</p>
             <p>
               Dr Lim's interests include preventive medicine, women's health and
               chronic disease management, with an emphasis on clear communication.
             </p>
-            <p class="about-v2-hours"><strong>Consultation:</strong> Tue-Sat, 8:00 AM-4:00 PM</p>
+            <p class="hours"><strong>Consultation:</strong> Tue-Sat, 8:00 AM-4:00 PM</p>
           </div>
         </article>
       </div>
@@ -136,8 +135,7 @@
 
   </main>
 
-  <!-- Keep your existing floating booking button -->
-  <a class="floating-btn" href="booking.html">Book Appointment</a>
+  <a class="book-tab" href="booking.html">Book Now</a>
 
 </body>
 </html>

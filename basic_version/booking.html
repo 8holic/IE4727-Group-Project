@@ -3,31 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book an Appointment — JnB Clinic</title>
+  <title>Book an Appointment | J&amp;B Family Clinic</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <nav class="segment nav">
-    <h1>Header Logo</h1>
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+      <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
 
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="service.html">Services</a>
-      <a href="location.html">Location</a>
-    </div>
+    <nav class="top-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a class="book-now" href="booking.html">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <a class="book-now" href="booking.html">Book An Appointment</a>
-  </nav>
-
-  <section class="hero">
-    <img src="assets/indexbanner.jpg" alt="JnB Clinic">
-    <div class="hero-text">
-      <h1>Ready to book?</h1>
-      <p>Your health is our priority.</p>
+  <!-- Hero Banner -->
+  <section class="clinic-hero clinic-hero--home" aria-label="Book an appointment">
+    <div class="clinic-hero-overlay">
+      <div class="clinic-hero-text">
+        <p>J&amp;B FAMILY CLINIC</p>
+        <h1>Ready to book?</h1>
+        <span>Your health is our priority.</span>
+      </div>
     </div>
   </section>
+
+  <!-- Floating Booking Tab -->
+  <a class="book-tab" href="booking.html">Book Now</a>
 
   <main class="container">
     <form id="bookingForm" class="booking-form">
