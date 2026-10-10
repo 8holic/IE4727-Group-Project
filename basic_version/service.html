@@ -3,35 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JnB Clinic</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Services | J&amp;B Family Clinic</title>
+  <link rel="stylesheet" href="pages.css">
 </head>
-<body>
+<body class="project-page">
 
-    <nav class="segment nav">
-        <h1>Header Logo</h1>
+  <header class="top-header">
+    <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+      <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
 
-        <div class="links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <p>Services</p>
-            <a href="location.html">Location</a>
-        </div>
-        <a class="book-now" href="booking.html">Book An Appointment</a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a class="active" href="service.html">Services</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+      </ul>
     </nav>
-    <section class="hero">
-        <img src="assets/indexbanner.jpg" alt="JnB Clinic">
+  </header>
 
-        <div class="hero-text">
-            <h1>These are the services we provide</h1>
-        </div>
+  <main class="services-page">
+    <section class="services-title-section">
+      <div class="services-title-text">
+        <p class="services-eyebrow">OUR SERVICES</p>
+        <h1>Everyday healthcare for you and your family.</h1>
+        <p>
+          From general consultations to preventive care and long-term health
+          management, J&amp;B Family Clinic provides essential primary care services in one
+          convenient location.
+        </p>
+      </div>
+
+      <div class="services-title-image">
+        <img src="assets/JnB Clinic.png" alt="J&B Family Clinic">
+      </div>
     </section>
-    <a class="book-tab" href="booking.html">Book Now</a>
-    
-    <main>
-      Insert your content here Javier
-    </main>
-    
-</body>
 
+    <section class="services-list-section">
+      <div class="services-section-heading">
+        <p class="services-section-label">WHAT WE OFFER</p>
+        <h2>Our clinic services</h2>
+        <p>Select the type of care you need before booking an appointment with our doctors.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-number">01</div>
+          <h3>General Consultation</h3>
+          <p>Assessment and treatment for common illnesses such as fever, cough, flu, headaches, stomach discomfort and minor infections.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">02</div>
+          <h3>Health Screening</h3>
+          <p>Routine health checks and screening packages to help identify health risks early and support preventive care.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">03</div>
+          <h3>Vaccinations</h3>
+          <p>Selected routine and travel vaccinations for suitable patients after assessment by our medical team.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">04</div>
+          <h3>Chronic Disease Care</h3>
+          <p>Ongoing monitoring and follow-up for conditions such as diabetes, high blood pressure and high cholesterol.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">05</div>
+          <h3>Minor Procedures</h3>
+          <p>Basic in-clinic procedures such as wound care and dressing, subject to the doctor's assessment of the patient's condition.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-number">06</div>
+          <h3>Family &amp; Preventive Care</h3>
+          <p>Preventive advice, lifestyle guidance and age-appropriate healthcare support for individuals and families.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="services-process">
+      <div class="services-section-heading">
+        <p class="services-section-label">APPOINTMENTS</p>
+        <h2>How booking works</h2>
+      </div>
+
+      <div class="services-process-grid">
+        <div class="services-process-step">
+          <span>1</span>
+          <h3>Choose your service</h3>
+          <p>Select the type of consultation or care that you require.</p>
+        </div>
+
+        <div class="services-process-step">
+          <span>2</span>
+          <h3>Select a doctor and time</h3>
+          <p>View the doctor's schedule and choose an available appointment slot.</p>
+        </div>
+
+        <div class="services-process-step">
+          <span>3</span>
+          <h3>Confirm your appointment</h3>
+          <p>Complete your booking details and receive confirmation of your appointment.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-btn" href="booking.html">Book Appointment</a>
+
+</body>
 </html>

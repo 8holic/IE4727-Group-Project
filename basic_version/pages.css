@@ -1,0 +1,650 @@
+/* =========================================================
+   pages.css
+   Complete styling for aboutus.html and service.html.
+   Both pages reference ONLY this stylesheet.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.project-page {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f9f8;
+  color: #27363a;
+}
+
+/* =========================================================
+   SHARED HEADER / NAVIGATION
+   ========================================================= */
+
+.top-header {
+  width: 100%;
+  min-height: 82px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 28px;
+  padding: 10px 26px;
+  background: #ffffff;
+  border-bottom: 1px solid #e1e8e7;
+}
+
+.logo-link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.clinic-logo {
+  display: block;
+  width: 185px;
+  height: 62px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.top-nav {
+  margin-left: auto;
+}
+
+.top-nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.top-nav a {
+  display: block;
+  padding: 9px 11px;
+  color: #28575a;
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 7px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.top-nav a:hover,
+.top-nav a.active {
+  background: #eaf4f2;
+  color: #174d50;
+}
+
+/* Floating button kept independent from booking-page implementation */
+.floating-btn {
+  position: fixed;
+  right: 26px;
+  bottom: 24px;
+  z-index: 20;
+  display: inline-block;
+  padding: 13px 20px;
+  border-radius: 8px;
+  background: #d95b54;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.floating-btn:hover {
+  background: #bd4842;
+}
+
+/* =========================================================
+   ABOUT US HERO
+   ========================================================= */
+
+.clinic-hero {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-image: url("assets/JnB Clinic.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.clinic-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(16, 39, 42, 0.48);
+}
+
+.clinic-hero-text {
+  max-width: 850px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.clinic-hero-text p {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.clinic-hero-text h1 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.12;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+
+.clinic-hero-text span {
+  color: #eef7f6;
+  font-size: 1rem;
+}
+
+/* =========================================================
+   ABOUT US PAGE
+   ========================================================= */
+
+.about-v2 {
+  padding: 52px 42px 95px;
+  min-height: 100vh;
+  background: #f6f9f8;
+}
+
+.about-v2-intro,
+.about-v2-values,
+.about-v2-doctors {
+  width: min(1050px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-v2-intro {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+  align-items: center;
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid #e0e8e6;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(40, 80, 76, 0.07);
+}
+
+.about-v2-label {
+  margin: 0 0 8px;
+  color: #26776f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.about-v2-copy h1 {
+  max-width: 650px;
+  margin: 0 0 15px;
+  color: #163f43;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.about-v2-lead,
+.about-v2-history p {
+  color: #617073;
+  line-height: 1.65;
+}
+
+.about-v2-history {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e9e7;
+}
+
+.about-v2-history h2 {
+  margin: 0 0 7px;
+  color: #1c5557;
+  font-size: 1.3rem;
+}
+
+.about-v2-history p {
+  margin: 0;
+}
+
+.about-v2-image-wrap {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #e8eeee;
+  box-shadow: 0 7px 20px rgba(28, 70, 72, 0.10);
+}
+
+.about-v2-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-v2-image-caption {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  background: #174d50;
+  color: #ffffff;
+}
+
+.about-v2-image-caption strong {
+  font-size: 1rem;
+}
+
+.about-v2-image-caption span {
+  margin-top: 2px;
+  color: #dcebea;
+  font-size: 0.85rem;
+}
+
+.about-v2-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding-top: 24px;
+}
+
+.about-v2-value {
+  display: flex;
+  gap: 13px;
+  padding: 18px;
+  background: #eef5f3;
+  border: 1px solid #dce9e6;
+  border-radius: 12px;
+}
+
+.about-v2-value > span {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #26776f;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.about-v2-value h3 {
+  margin: 0 0 4px;
+  color: #1d5152;
+  font-size: 1rem;
+}
+
+.about-v2-value p {
+  margin: 0;
+  color: #68777a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.about-v2-doctors {
+  padding-top: 52px;
+}
+
+.about-v2-heading {
+  max-width: 650px;
+  margin: 0 auto 25px;
+  text-align: center;
+}
+
+.about-v2-heading h2 {
+  margin: 0 0 8px;
+  color: #163f43;
+  font-size: 2rem;
+}
+
+.about-v2-heading > p:last-child {
+  color: #69787b;
+}
+
+.about-v2-doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.about-v2-doctor-card {
+  display: flex;
+  gap: 17px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e0e8e6;
+  border-radius: 14px;
+  box-shadow: 0 7px 19px rgba(40, 80, 76, 0.06);
+}
+
+.about-v2-doctor-avatar {
+  flex: 0 0 70px;
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #dcefed;
+  color: #226a64;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.about-v2-doctor-content h3 {
+  margin: 0;
+  color: #173f42;
+  font-size: 1.18rem;
+}
+
+.about-v2-role {
+  margin: 2px 0 9px;
+  color: #26776f;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.about-v2-doctor-content > p:not(.about-v2-role):not(.about-v2-hours) {
+  color: #667477;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.about-v2-hours {
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid #e4ebea;
+  color: #526366;
+  font-size: 0.87rem;
+}
+
+/* =========================================================
+   SERVICES PAGE
+   ========================================================= */
+
+.services-page {
+  padding: 52px 42px 95px;
+  min-height: 100vh;
+  background: #f6f9f8;
+}
+
+.services-title-section,
+.services-list-section,
+.services-process {
+  width: min(1050px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services-title-section {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 36px;
+  align-items: center;
+  padding: 34px;
+  background: #ffffff;
+  border: 1px solid #e0e8e6;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(40, 80, 76, 0.07);
+}
+
+.services-eyebrow,
+.services-section-label {
+  margin: 0 0 9px;
+  color: #28786f;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.services-title-text h1 {
+  margin: 0 0 15px;
+  color: #183b38;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.12;
+}
+
+.services-title-text > p:last-child {
+  margin: 0;
+  color: #60706e;
+  line-height: 1.65;
+}
+
+.services-title-image {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #e8efed;
+  box-shadow: 0 7px 20px rgba(26, 72, 67, 0.10);
+}
+
+.services-title-image img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.services-list-section {
+  padding-top: 50px;
+}
+
+.services-section-heading {
+  max-width: 700px;
+  margin: 0 auto 26px;
+  text-align: center;
+}
+
+.services-section-heading h2 {
+  margin: 0 0 9px;
+  color: #183b38;
+  font-size: 2rem;
+}
+
+.services-section-heading > p:last-child {
+  margin: 0;
+  color: #657270;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.service-card {
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #dde8e5;
+  border-radius: 13px;
+  box-shadow: 0 6px 18px rgba(26, 72, 67, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 23px rgba(26, 72, 67, 0.10);
+}
+
+.service-number {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 9px;
+  background: #e1f0ed;
+  color: #28786f;
+  font-weight: 700;
+}
+
+.service-card h3 {
+  margin: 0 0 8px;
+  color: #183b38;
+  font-size: 1.07rem;
+}
+
+.service-card p {
+  margin: 0;
+  color: #657270;
+  line-height: 1.58;
+}
+
+.services-process {
+  padding-top: 52px;
+}
+
+.services-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.services-process-step {
+  padding: 22px;
+  text-align: center;
+  background: #eef5f3;
+  border-radius: 12px;
+}
+
+.services-process-step span {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #28786f;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.services-process-step h3 {
+  margin: 0 0 7px;
+  color: #183b38;
+  font-size: 1.04rem;
+}
+
+.services-process-step p {
+  margin: 0;
+  color: #657270;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .about-v2-intro,
+  .services-title-section,
+  .about-v2-doctor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-v2-values,
+  .services-grid,
+  .services-process-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .top-header {
+    gap: 14px;
+    padding: 10px 16px;
+  }
+
+  .clinic-logo {
+    width: 145px;
+    height: 52px;
+  }
+
+  .top-nav {
+    overflow-x: auto;
+  }
+
+  .top-nav ul {
+    width: max-content;
+  }
+
+  .clinic-hero {
+    height: 250px;
+  }
+
+  .clinic-hero-overlay {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 620px) {
+  /* Keep the logo on the left and navigation on the top-right. */
+  .top-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 8px 12px;
+  }
+
+  .clinic-logo {
+    width: 120px;
+    height: 44px;
+  }
+
+  .top-nav {
+    width: auto;
+    margin-left: auto;
+    overflow-x: auto;
+  }
+
+  .top-nav a {
+    padding: 7px 8px;
+    font-size: 0.82rem;
+  }
+
+  .about-v2,
+  .services-page {
+    padding: 28px 16px 90px;
+  }
+
+  .about-v2-intro,
+  .services-title-section {
+    padding: 24px 20px;
+  }
+
+  .about-v2-values,
+  .services-grid,
+  .services-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-v2-doctor-card {
+    flex-direction: column;
+  }
+
+  .floating-btn {
+    right: 16px;
+    bottom: 16px;
+  }
+}

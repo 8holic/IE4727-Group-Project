@@ -3,37 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JnB Clinic</title>
-  <link rel="stylesheet" href="style.css">
+  <title>About Us | J&amp;B Family Clinic</title>
+  
+  <link rel="stylesheet" href="pages.css">
 </head>
-<body>
+<body class="project-page">
 
-  <nav class="segment nav">
-    <h1>Header Logo</h1>
+  <!-- TOP HEADER: logo left, navigation right -->
+  <header class="top-header">
+    <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+      <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
 
-    <div class="links">
-      <a href="index.html">Home</a>
-      <p>About Us</p>
-      <a href="service.html">Services</a>
-      <a href="location.html">Location</a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="aboutus.html">About Us</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a class="book-nav" href="booking.html">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO: keeps the older background-banner idea, but uses clean CSS -->
+  <section class="clinic-hero" aria-label="J&B Family Clinic introduction">
+    <div class="clinic-hero-overlay">
+      <div class="clinic-hero-text">
+        <p>J&amp;B FAMILY CLINIC</p>
+        <h1>Quality Healthcare For You and Your Family</h1>
+        <span>Friendly, dependable primary care for every stage of life.</span>
+      </div>
     </div>
+  </section>
 
-    <a class="book-now" href="booking.html">Book An Appointment</a>
-  </nav>
-    <section class="hero">
-    <img src="assets/indexbanner.jpg" alt="JnB Clinic">
-    
-    <div class="hero-text">
-        <h1>Find out more about JnB Clinic</h1>
-        <p>Your health is our priority.</p>
-    </div>
+  <main class="page-content about-v2">
+
+    <!-- CLINIC HISTORY / ABOUT -->
+    <section class="about-v2-intro">
+      <div class="about-v2-copy">
+        <p class="about-v2-label">ABOUT US</p>
+        <h1>Care you can feel comfortable coming back to.</h1>
+        <p class="about-v2-lead">
+          J&amp;B Family Clinic provides convenient and dependable primary healthcare
+          for individuals and families. We focus on clear communication, practical
+          medical advice and continuity of care.
+        </p>
+
+        <div class="about-v2-history">
+          <h2>Our Clinic</h2>
+          <p>
+            J&amp;B Family Clinic was established to make everyday healthcare simple
+            and approachable. From general consultations and preventive care to
+            long-term health management, our doctors work with patients to understand
+            their concerns and provide suitable care plans.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-v2-image-wrap">
+        <img src="assets/JnB Clinic.png" alt="Interior of J&B Family Clinic">
+        <div class="about-v2-image-caption">
+          <strong>J&amp;B Family Clinic</strong>
+          <span>Comfortable care for every stage of life</span>
+        </div>
+      </div>
     </section>
-    <a class="book-tab" href="booking.html">Book Now</a>
 
-    <main>
-      Insert your content here Javier
-    </main>
+    <!-- VALUES -->
+    <section class="about-v2-values" aria-label="Our values">
+      <div class="about-v2-value">
+        <span>01</span>
+        <div>
+          <h3>Patient-centred</h3>
+          <p>We listen carefully and treat every patient with respect.</p>
+        </div>
+      </div>
+
+      <div class="about-v2-value">
+        <span>02</span>
+        <div>
+          <h3>Clear communication</h3>
+          <p>We explain your options in a straightforward and understandable way.</p>
+        </div>
+      </div>
+
+      <div class="about-v2-value">
+        <span>03</span>
+        <div>
+          <h3>Continuity of care</h3>
+          <p>We support follow-up and longer-term health management where needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCTORS: modern card layout instead of using a table for page layout -->
+    <section class="about-v2-doctors">
+      <div class="about-v2-heading">
+        <p class="about-v2-label">OUR MEDICAL TEAM</p>
+        <h2>Meet our doctors</h2>
+        <p>Get to know the doctors available for consultation at J&amp;B Family Clinic.</p>
+      </div>
+
+      <div class="about-v2-doctor-grid">
+        <article class="about-v2-doctor-card">
+          <div class="about-v2-doctor-avatar">JT</div>
+          <div class="about-v2-doctor-content">
+            <h3>Dr Jonathan Tan</h3>
+            <p class="about-v2-role">General Practitioner</p>
+            <p>
+              Dr Tan has an interest in family medicine, preventive healthcare and
+              the management of common acute and chronic conditions.
+            </p>
+            <p class="about-v2-hours"><strong>Consultation:</strong> Mon-Fri, 9:00 AM-5:00 PM</p>
+          </div>
+        </article>
+
+        <article class="about-v2-doctor-card">
+          <div class="about-v2-doctor-avatar">BL</div>
+          <div class="about-v2-doctor-content">
+            <h3>Dr Brenda Lim</h3>
+            <p class="about-v2-role">Family Physician</p>
+            <p>
+              Dr Lim's interests include preventive medicine, women's health and
+              chronic disease management, with an emphasis on clear communication.
+            </p>
+            <p class="about-v2-hours"><strong>Consultation:</strong> Tue-Sat, 8:00 AM-4:00 PM</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Keep your existing floating booking button -->
+  <a class="floating-btn" href="booking.html">Book Appointment</a>
 
 </body>
-
 </html>
