@@ -3,7 +3,7 @@ require __DIR__ . '/api/booking_rules.php';
 
 $conn = db();
 
-$code = strtoupper(trim($_GET['code'] ?? ''));
+$code = strtoupper(get_str('code'));
 $booking = null;
 
 if ($code !== '') {

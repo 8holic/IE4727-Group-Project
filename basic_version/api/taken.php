@@ -8,8 +8,8 @@ try {
     die("Database connection failed");
 }
 
-$date   = $_GET['date'] ?? '';
-$doctor = $_GET['doctor'] ?? '';
+$date   = is_string($_GET['date'] ?? null) ? $_GET['date'] : '';
+$doctor = is_string($_GET['doctor'] ?? null) ? $_GET['doctor'] : '';
 
 $sql = "SELECT slot_start FROM appointments
         WHERE doctor = ? AND DATE(slot_start) = ? AND status = 'booked'";

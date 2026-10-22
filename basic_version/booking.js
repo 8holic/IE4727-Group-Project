@@ -4,6 +4,7 @@
 const timeSelect = document.getElementById("timeSlot");
 const dateInput = document.getElementById("date");
 const doctorSelect = document.getElementById("doctor");
+const countrySelect = document.getElementById("country");
 
 let doctorDays = {};       // { "Dr Bryan": [1,2,3,4,5], ... }
 let closedDays = [];       // ISO weekdays the clinic is shut (7 = Sunday)
@@ -11,7 +12,7 @@ let openStart = "09:00";
 let openEnd = "17:40";
 let takenSlots = [];       // times already booked for the chosen doctor + date
 
-const formFields = ["name", "email", "phone", "doctor", "date", "timeSlot"];
+const formFields = ["name", "email", "country", "phone", "doctor", "date", "timeSlot"];
 
 function sgDate(offsetDays) {
     const d = new Date(Date.now() + offsetDays * 86400000);
@@ -82,8 +83,21 @@ const validators = {
         return value ? "" : "Please enter your name.";
     },
     email: emailError,
+    country: function (value) {
+        return value === "SG" || value === "MY" ? "" : "Please choose a country.";
+    },
     phone: function (value) {
-        return !value || /^[+()\d\s-]{6,}$/.test(value) ? "" : "Please enter a valid phone number.";
+        if (!value) return "";
+
+        const digits = value.replace(/[\s\-().]/g, "");
+        const country = countrySelect.value;
+
+        if (country === "SG" && /^(?:\+?65)?[3689]\d{7}$/.test(digits)) return "";
+        if (country === "MY" && /^(?:\+?60|0)(?:1\d{8,9}|[3-9]\d{7,8})$/.test(digits)) return "";
+
+        return country === "MY"
+            ? "Please enter a valid Malaysia phone number."
+            : "Please enter a valid Singapore phone number.";
     },
     doctor: function (value) {
         return value ? "" : "Please choose a doctor.";
@@ -223,6 +237,10 @@ async function init() {
         checkField("doctor");
         checkField("timeSlot");
         markTaken();
+    });
+    countrySelect.addEventListener("change", function () {
+        checkField("country");
+        checkField("phone");
     });
 
     // On submit, validate, then combine date + time into one value and POST it.

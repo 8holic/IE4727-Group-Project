@@ -31,6 +31,16 @@ function db() {
     }
 }
 
+function post_str($key) {
+    $value = $_POST[$key] ?? '';
+    return is_string($value) ? trim($value) : '';
+}
+
+function get_str($key) {
+    $value = $_GET[$key] ?? '';
+    return is_string($value) ? trim($value) : '';
+}
+
 function validate_patient($name, $email) {
     if ($name === '') {
         return "Please enter your name.";
@@ -39,6 +49,31 @@ function validate_patient($name, $email) {
         return "Please enter a valid email address.";
     }
     return "";
+}
+
+function validate_phone($country, $phone) {
+    $phone = trim($phone);
+    if ($phone === '') {
+        return "";
+    }
+
+    $digits = preg_replace('/[\s\-().]/', '', $phone);
+
+    if ($country === 'SG') {
+        if (!preg_match('/^(?:\+?65)?[3689]\d{7}$/', $digits)) {
+            return "Please enter a valid Singapore phone number.";
+        }
+        return "";
+    }
+
+    if ($country === 'MY') {
+        if (!preg_match('/^(?:\+?60|0)(?:1\d{8,9}|[3-9]\d{7,8})$/', $digits)) {
+            return "Please enter a valid Malaysia phone number.";
+        }
+        return "";
+    }
+
+    return "Please choose a country.";
 }
 
 // $start is "YYYY-MM-DD HH:MM:SS". Returns an error message, or "" if valid.

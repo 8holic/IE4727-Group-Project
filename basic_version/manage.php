@@ -3,7 +3,11 @@ require __DIR__ . '/api/booking_rules.php';
 
 $conn = db();
 
-$code = strtoupper(trim($_POST['code'] ?? $_GET['code'] ?? ''));
+$code = post_str('code');
+if ($code === '') {
+    $code = get_str('code');
+}
+$code = strtoupper($code);
 
 function find_booking($conn, $code) {
     if ($code === '') {
@@ -29,14 +33,14 @@ if ($code !== '' && !$booking) {
     $error = "We could not find a booking for that code.";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_str('action') === 'update') {
     if (!$booking) {
         $error = "We could not find a booking for that code.";
     } elseif ($booking['status'] !== 'booked') {
         $error = "This booking can no longer be changed.";
     } else {
-        $dateValue = trim($_POST['date'] ?? '');
-        $timeValue = trim($_POST['start'] ?? '');
+        $dateValue = post_str('date');
+        $timeValue = post_str('start');
         $start = $dateValue . ' ' . $timeValue . ':00';
 
         $error = validate_slot($booking['doctor'], $start);

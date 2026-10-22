@@ -8,14 +8,18 @@ const CLINIC_MAIL_FROM = "deepseek@localhost";
 
 $conn = db();
 
-$name     = trim($_POST['name'] ?? '');
-$email    = trim($_POST['email'] ?? '');
-$phone    = $_POST['phone'] ?? '';
-$doctor   = $_POST['doctor'] ?? '';
-$start    = $_POST['start'] ?? '';
+$name     = post_str('name');
+$email    = post_str('email');
+$phone    = post_str('phone');
+$country  = post_str('country');
+$doctor   = post_str('doctor');
+$start    = post_str('start');
 
 // --- Validation: before insert ---
 $error = validate_patient($name, $email);
+if ($error === '') {
+    $error = validate_phone($country, $phone);
+}
 if ($error === '') {
     $error = validate_slot($doctor, $start);
 }
