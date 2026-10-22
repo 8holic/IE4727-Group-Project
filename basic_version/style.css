@@ -560,6 +560,14 @@ body {
   font-size: 0.85rem;
 }
 
+.booking-code {
+  margin: 0.25rem 0 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--brand-dark);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .info-card,

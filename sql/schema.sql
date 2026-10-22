@@ -18,8 +18,9 @@ CREATE TABLE IF NOT EXISTS doctors (
   created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
 );
 
--- Appointments. Patients never log in: they manage a booking through the
--- manage_token emailed to them (an "edit my appointment" link).
+-- Appointments. Patients never log in: they manage a booking with the short
+-- booking code emailed to them (stored in manage_token, e.g. "K7M9PQ3R").
+-- The same code is typed into the Manage Booking page.
 --
 -- "doctor" holds the doctor's name. Opening hours are 9:00 AM - 6:00 PM:
 --   Dr Bryan  : Mon-Fri
@@ -51,9 +52,9 @@ CREATE TABLE IF NOT EXISTS appointments (
 --   Patient edits their own:UPDATE appointments SET ... WHERE id = ? AND manage_token = ?;
 --                           (0 rows affected = not their booking)
 --
---   On insert, generate the token with:
---     $token = bin2hex(random_bytes(32));   // 64 hex chars
---   and email a link like:  manage.php?token=$token
+--   On insert, generate the booking code and store it in manage_token:
+--     $code = 8 chars from "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+--   and email it, plus a link:  manage.php?code=$code
 --
 --   Taken-slot lookup ignores cancelled rows:
 --     ... WHERE doctor = ? AND DATE(slot_start) = ? AND status = 'booked'

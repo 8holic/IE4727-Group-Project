@@ -250,8 +250,17 @@ async function init() {
         });
         const result = await response.text();
 
+        if (response.ok) {
+            const parts = result.trim().split("|");
+            const code = parts[0];
+            const sent = parts[1] === "1" ? "1" : "0";
+            window.location.href = "confirmation.php?code=" +
+                encodeURIComponent(code) + "&sent=" + sent;
+            return;
+        }
+
         msg.textContent = result;
-        msg.className = "form-msg " + (response.ok ? "success" : "error");
+        msg.className = "form-msg error";
         markTaken();
     });
 
