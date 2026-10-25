@@ -320,11 +320,19 @@ for ($hour = $openHour; $hour <= $closeHour; $hour++) {
 
   <main class="page">
 
-    <div class="staff-head">
+    <!--<div class="staff-head">
       <div>
         <p class="eyebrow">STAFF</p>
         <h1>Appointments</h1>
-      </div>
+      </div>    
+    </div>-->
+
+    <div class="staff-head">
+        <div>
+            <p class="eyebrow">STAFF PORTAL</p>
+            <h1>Appointments</h1>
+            <p>Signed in as <?= h($_SESSION['doctor_name'] ?? '') ?></p>
+        </div>
     </div>
 
     <p class="form-msg <?= $notice !== '' ? 'success' : '' ?>"><?= h($notice) ?></p>
