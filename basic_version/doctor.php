@@ -226,7 +226,7 @@ if (!doctor_logged_in()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Login | J&amp;B Family Clinic</title>
+  <title>Employee Login | J&amp;B Family Clinic</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -239,7 +239,7 @@ if (!doctor_logged_in()) {
 
   <main class="page">
     <section class="booking-form">
-      <h2>Doctor Login</h2>
+      <h2>Employee Login</h2>
       <p>Clinic staff sign in here.</p>
 
       <form method="post" action="doctor.php">
@@ -263,7 +263,7 @@ if (!doctor_logged_in()) {
         <button type="submit">Log In</button>
       </form>
 
-      <p>Patient? <a href="login.php">Patient login</a>.</p>
+      <p>Patient? <a href="login.php">Patient Login</a>.</p>
     </section>
   </main>
 

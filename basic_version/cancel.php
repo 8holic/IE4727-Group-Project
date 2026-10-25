@@ -91,6 +91,7 @@ mysqli_close($conn);
         <li><a href="service.html">Services</a></li>
         <li><a href="location.html">Location</a></li>
         <li><a class="active" href="my_appointments.php">My Appointments</a></li>
+        <li><a href="doctor.php">Employee Login</a></li>
         <li><a href="logout.php">Logout</a></li>
         <li><a class="book-now" href="booking.php">Book Now</a></li>
       </ul>

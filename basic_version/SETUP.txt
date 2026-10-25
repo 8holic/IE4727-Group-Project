@@ -10,14 +10,16 @@ Database
 Import basic_version/sql/database.sql.
 This DROPS and recreates the jnb_clinic database.
 
-Doctor login (URL only, not linked in the public navigation)
--------------------------------------------------------------
-http://localhost/basic_version/doctor.php
+Employee login
+--------------
+The Employee Login link in the navigation opens doctor.php.
+
+  http://localhost/basic_version/doctor.php
 
   bryan@localhost.net  / bryan123
   javier@localhost.net / javier123
 
-Patients register through login.php.
+Patients register through register.php and sign in through login.php.
 
 Email
 -----
