@@ -1,0 +1,59 @@
+J&B Family Clinic - local setup notes
+=====================================
+
+Requirements
+------------
+XAMPP with Apache, MySQL, and Mercury Mail running.
+
+Database
+--------
+Import basic_version/sql/database.sql.
+This DROPS and recreates the jnb_clinic database.
+
+Doctor login (URL only, not linked in the public navigation)
+-------------------------------------------------------------
+http://localhost/basic_version/doctor.php
+
+  bryan@localhost.net  / bryan123
+  javier@localhost.net / javier123
+
+Patients register through login.php.
+
+Email
+-----
+Mercury local domains:
+  localhost
+  localhost.net
+  localhost.org
+  localhost.com
+
+The application only sends to those domains. External addresses are blocked
+by includes/mail.php before mail() is called.
+
+Sender: jnb@localhost.net
+
+The sender must be an existing Mercury user. Otherwise Mercury rejects the
+message with "invalid or illegal from address".
+
+For delivery testing, use an existing Mercury mailbox such as:
+  1234@localhost.net
+
+Mercury user mailboxes are stored in C:\xampp\MercuryMail\MAIL.
+The user list is C:\xampp\MercuryMail\MAIL\PMAIL.USR in the form:
+  U;username;Full Name
+
+To add a mailbox:
+  1. Stop Mercury.
+  2. Back up MAIL\PMAIL.USR and the MAIL folder.
+  3. Create MAIL\<username>\PASSWD.PM.
+  4. Append U;<username>;<Full Name> to PMAIL.USR.
+  5. Start Mercury.
+
+PASSWD.PM is only needed for POP3/IMAP login; mail delivery does not require
+a password.
+
+Notes
+-----
+Booking window: today through +2 days.
+Appointment slots: every 20 minutes, 09:00 to 17:40.
+Clinic closed Sundays.

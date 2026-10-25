@@ -2,18 +2,14 @@
 session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
 session_start();
 
-require __DIR__ . '/api/booking_rules.php';
-require __DIR__ . '/api/mail.php';
+require __DIR__ . '/includes/booking_rules.php';
+require __DIR__ . '/includes/mail.php';
 
 $conn = db();
 
 $error = "";
 $notice = $_SESSION['flash'] ?? "";
 unset($_SESSION['flash']);
-
-function h($value) {
-    return htmlspecialchars((string) $value);
-}
 
 function doctor_logged_in() {
     return isset($_SESSION['doctor_id']);
@@ -41,7 +37,7 @@ function send_cancel_email($row, $reason) {
           . "Date and time: " . $when . "\n"
           . "Reason: " . $reason . "\n\n"
           . "To book another appointment, visit:\n"
-          . $base . "/booking.html\n\n"
+          . $base . "/booking.php\n\n"
           . "J&B Family Clinic\n";
 
     return send_mail(
@@ -61,8 +57,8 @@ function send_reschedule_email($row, $newStart) {
           . "New date and time: " . $when . "\n\n";
 
     if (!empty($row['manage_token'])) {
-        $body .= "To view or change your appointment, open:\n"
-               . $base . "/manage.php?code=" . urlencode($row['manage_token']) . "\n\n"
+        $body .= "To view or change your appointment, log in and open:\n"
+               . $base . "/my_appointments.php\n\n"
                . "Your booking code: " . $row['manage_token'] . "\n\n";
     }
 
@@ -83,21 +79,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'login') {
     $password = $_POST['password'] ?? '';
     $password = is_string($password) ? $password : '';
 
-    $stmt = mysqli_prepare($conn, "SELECT id, name, password_hash FROM doctors WHERE email = ?");
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $doctor = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
-    mysqli_stmt_close($stmt);
+    if (!csrf_ok()) {
+        $error = "Your session expired. Please try again.";
+    } else {
+        $stmt = mysqli_prepare($conn, "SELECT id, name, password_hash FROM doctors WHERE email = ?");
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $doctor = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+        mysqli_stmt_close($stmt);
 
-    if ($doctor && password_verify($password, $doctor['password_hash'])) {
-        session_regenerate_id(true);
-        $_SESSION['doctor_id'] = (int) $doctor['id'];
-        $_SESSION['doctor_name'] = $doctor['name'];
-        header("Location: doctor.php");
-        exit;
+        if ($doctor && password_verify($password, $doctor['password_hash'])) {
+            session_regenerate_id(true);
+            unset($_SESSION['user_id'], $_SESSION['user_name'], $_SESSION['user_email'], $_SESSION['user_role']);
+            $_SESSION['doctor_id'] = (int) $doctor['id'];
+            $_SESSION['doctor_name'] = $doctor['name'];
+            header("Location: doctor.php");
+            exit;
+        }
+
+        $error = "Invalid email or password.";
     }
-
-    $error = "Invalid email or password.";
 }
 elseif (get_str('logout') === '1') {
     $_SESSION = [];
@@ -238,21 +239,31 @@ if (!doctor_logged_in()) {
 
   <main class="page">
     <section class="booking-form">
-      <h2>Doctor login</h2>
+      <h2>Doctor Login</h2>
+      <p>Clinic staff sign in here.</p>
 
-      <form method="post">
+      <form method="post" action="doctor.php">
         <input type="hidden" name="action" value="login">
+        <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required
+               autocomplete="email" placeholder="name@example.com"
+               pattern="[A-Za-z0-9._%+\-]+@(?:[A-Za-z0-9\-]+\.)+[A-Za-z]{2,}|[A-Za-z0-9._%+\-]+@localhost"
+               title="Enter an email like name@example.com.">
+        <span class="input-error" data-error="Email must contain one @ and a valid domain, e.g. name@example.com."></span>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required
+               placeholder="Password" autocomplete="current-password">
+        <span class="input-error" data-error="Enter your password."></span>
 
         <p class="form-msg <?= $error !== '' ? 'error' : '' ?>"><?= h($error) ?></p>
 
-        <button type="submit">Log in</button>
+        <button type="submit">Log In</button>
       </form>
+
+      <p>Patient? <a href="login.php">Patient login</a>.</p>
     </section>
   </main>
 
@@ -345,7 +356,7 @@ for ($hour = $openHour; $hour <= $closeHour; $hour++) {
             <td><span class="status status-<?= h($a['status']) ?>"><?= h($a['status']) ?></span></td>
             <td>
 <?php if ($a['status'] === 'booked' && strtotime($a['slot_start']) >= time()): ?>
-              <form method="post" class="reschedule-form">
+              <form method="post" class="reschedule-form" action="doctor.php">
                 <input type="hidden" name="action" value="reschedule">
                 <input type="hidden" name="id" value="<?= (int) $a['id'] ?>">
                 <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
@@ -364,8 +375,7 @@ for ($hour = $openHour; $hour <= $closeHour; $hour++) {
             </td>
             <td>
 <?php if ($a['status'] === 'booked'): ?>
-              <form method="post" class="cancel-form"
-                    onsubmit="return confirm('Cancel this appointment and email the patient?');">
+              <form method="post" class="cancel-form" action="doctor.php">
                 <input type="hidden" name="action" value="cancel">
                 <input type="hidden" name="id" value="<?= (int) $a['id'] ?>">
                 <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">

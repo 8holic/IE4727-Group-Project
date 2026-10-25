@@ -1,88 +1,103 @@
 <?php
-require __DIR__ . '/api/booking_rules.php';
+require __DIR__ . '/includes/auth.php';
+require __DIR__ . '/includes/booking_rules.php';
+require __DIR__ . '/includes/mail.php';
+require_patient('my_appointments.php');
 
 $conn = db();
 
-$code = post_str('code');
-if ($code === '') {
-    $code = get_str('code');
-}
-$code = strtoupper($code);
+$id = (int) (post_str('id') !== '' ? post_str('id') : get_str('id'));
+$error = '';
+$selectedDate = get_str('date');
+$selectedTime = '';
 
-function find_booking($conn, $code) {
-    if ($code === '') {
-        return null;
-    }
+function find_appointment($conn, $id, $patientId) {
     $stmt = mysqli_prepare($conn,
-        "SELECT id, patient_name, doctor, slot_start, status
-         FROM appointments WHERE manage_token = ?");
-    mysqli_stmt_bind_param($stmt, "s", $code);
+        "SELECT id, patient_id, patient_name, patient_email, doctor, slot_start, status
+         FROM appointments WHERE id = ? AND patient_id = ?");
+    mysqli_stmt_bind_param($stmt, 'ii', $id, $patientId);
     mysqli_stmt_execute($stmt);
     $row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
     mysqli_stmt_close($stmt);
     return $row;
 }
 
-$booking = find_booking($conn, $code);
-$error = "";
-$notice = "";
-$dateValue = "";
-$timeValue = "";
+$booking = find_appointment($conn, $id, $_SESSION['user_id']);
 
-if ($code !== '' && !$booking) {
-    $error = "We could not find a booking for that code.";
-}
+if (!$booking) {
+    http_response_code(404);
+    $error = 'We could not find that appointment on your account.';
+} else {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_str('action') === 'update') {
+        $selectedDate = post_str('date');
+        $selectedTime = post_str('start');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && post_str('action') === 'update') {
-    if (!$booking) {
-        $error = "We could not find a booking for that code.";
-    } elseif ($booking['status'] !== 'booked') {
-        $error = "This booking can no longer be changed.";
-    } else {
-        $dateValue = post_str('date');
-        $timeValue = post_str('start');
-        $start = $dateValue . ' ' . $timeValue . ':00';
+        if (!csrf_ok()) {
+            $error = 'Your session expired. Please try again.';
+        } elseif ($booking['status'] !== 'booked') {
+            $error = 'This appointment can no longer be changed.';
+        } else {
+            $start = $selectedDate . ' ' . $selectedTime . ':00';
+            $error = validate_slot($booking['doctor'], $start);
 
-        $error = validate_slot($booking['doctor'], $start);
-
-        if ($error === '') {
-            $stmt = mysqli_prepare($conn,
-                "UPDATE appointments SET slot_start = ?
-                 WHERE id = ? AND manage_token = ? AND status = 'booked'");
-            mysqli_stmt_bind_param($stmt, "sis", $start, $booking['id'], $code);
-
-            try {
-                mysqli_stmt_execute($stmt);
-                $notice = "Your appointment has been updated.";
-                $booking = find_booking($conn, $code);
-            } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 1062) {
-                    $error = "Sorry, that time slot is already booked. Please choose another time.";
-                } else {
-                    $error = "Could not update the booking. Please try again.";
+            if ($error === '') {
+                $available = available_times($conn, $booking['doctor'], $selectedDate, $booking['id']);
+                if (!in_array($selectedTime, $available, true)) {
+                    $error = 'That appointment time is no longer available. Please choose another time.';
                 }
             }
 
-            mysqli_stmt_close($stmt);
+            if ($error === '') {
+                $stmt = mysqli_prepare($conn,
+                    "UPDATE appointments SET slot_start = ?
+                     WHERE id = ? AND patient_id = ? AND status = 'booked'");
+                mysqli_stmt_bind_param($stmt, 'sii', $start, $booking['id'], $_SESSION['user_id']);
+
+                try {
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_close($stmt);
+
+                    $when = date('D, j M Y, g:i A', strtotime($start));
+                    $body = "Hi " . $booking['patient_name'] . ",\n\n"
+                          . "Your appointment at J&B Family Clinic has been rescheduled.\n\n"
+                          . "Doctor: " . $booking['doctor'] . "\n"
+                          . "New date and time: " . $when . " (SGT)\n\n"
+                          . "J&B Family Clinic\n";
+                    $sent = send_mail($booking['patient_email'],
+                        'Appointment rescheduled - ' . date('j M Y', strtotime($start)), $body);
+
+                    $msg = 'Appointment rescheduled.';
+                    if (!$sent) {
+                        $msg .= ' The confirmation email could not be sent.';
+                    }
+                    mysqli_close($conn);
+                    header('Location: my_appointments.php?message=' . urlencode($msg));
+                    exit;
+                } catch (mysqli_sql_exception $e) {
+                    $error = $e->getCode() == 1062
+                        ? 'Sorry, that time slot is already booked. Please choose another time.'
+                        : 'Could not update the booking. Please try again.';
+                }
+            }
         }
     }
-}
 
-if ($dateValue === '' && $booking) {
-    $dateValue = substr($booking['slot_start'], 0, 10);
-}
-if ($timeValue === '' && $booking) {
-    $timeValue = substr($booking['slot_start'], 11, 5);
-}
+    if ($selectedDate === '') {
+        $selectedDate = substr($booking['slot_start'], 0, 10);
+    }
 
-$minDate = date("Y-m-d");
-$maxDate = date("Y-m-d", strtotime("+2 days"));
+    $currentDate = substr($booking['slot_start'], 0, 10);
+    if ($selectedTime === '' && $selectedDate === $currentDate) {
+        $selectedTime = substr($booking['slot_start'], 11, 5);
+    }
 
-$startHour = (int) substr($openStart, 0, 2);
-$endHour   = (int) substr($openEnd, 0, 2);
-$endMin    = (int) substr($openEnd, 3, 2);
+    $available = available_times($conn, $booking['doctor'], $selectedDate, $booking['id']);
+}
 
 mysqli_close($conn);
+
+$minDate = date('Y-m-d');
+$maxDate = date('Y-m-d', strtotime('+2 days'));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,143 +108,86 @@ mysqli_close($conn);
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header class="top-header">
     <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
       <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
     </a>
-
     <nav class="top-nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="service.html">Services</a></li>
         <li><a href="location.html">Location</a></li>
-        <li><a class="active" href="manage.php">Manage Booking</a></li>
-        <li><a href="doctor.php">Doctor Login</a></li>
-        <li><a class="book-now" href="booking.html">Book Now</a></li>
+        <li><a href="my_appointments.php">My Appointments</a></li>
+        <li><a href="logout.php">Logout</a></li>
+        <li><a class="book-now" href="booking.php">Book Now</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="page">
-
 <?php if ($booking): ?>
     <section class="booking-form">
       <h2>Manage your booking</h2>
 
       <p>
-        <strong>Patient:</strong>
-        <?= htmlspecialchars($booking['patient_name']) ?><br>
-        <strong>Doctor:</strong>
-        <?= htmlspecialchars($booking['doctor']) ?><br>
+        <strong>Patient:</strong> <?= h($booking['patient_name']) ?><br>
+        <strong>Doctor:</strong> <?= h($booking['doctor']) ?><br>
         <strong>Current appointment:</strong>
-        <?= htmlspecialchars(date("D, j M Y, g:i A", strtotime($booking['slot_start']))) ?><br>
-        <strong>Booking code:</strong>
-        <span class="booking-code"><?= htmlspecialchars($code) ?></span>
+        <?= h(date('D, j M Y, g:i A', strtotime($booking['slot_start']))) ?>
       </p>
 
 <?php if ($booking['status'] !== 'booked'): ?>
       <p class="form-msg error">This booking has been cancelled and can no longer be changed.</p>
 <?php else: ?>
-      <form method="post" novalidate>
-        <input type="hidden" name="code" value="<?= htmlspecialchars($code) ?>">
-        <input type="hidden" name="action" value="update">
+<?php if ($error !== ''): ?>
+      <p class="form-msg error"><?= h($error) ?></p>
+<?php endif; ?>
+
+      <form method="get" action="manage.php">
+        <input type="hidden" name="id" value="<?= (int) $booking['id'] ?>">
 
         <label for="date">New date:</label>
         <input type="date" id="date" name="date" required
                min="<?= $minDate ?>" max="<?= $maxDate ?>"
-               value="<?= htmlspecialchars($dateValue) ?>">
+               value="<?= h($selectedDate) ?>">
+        <span class="input-error" data-error="Please choose a date."></span>
+
+        <button type="submit">Check times</button>
+      </form>
+
+      <form method="post" action="manage.php">
+        <input type="hidden" name="id" value="<?= (int) $booking['id'] ?>">
+        <input type="hidden" name="date" value="<?= h($selectedDate) ?>">
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
 
         <label for="start">New time:</label>
         <select id="start" name="start" required>
-          <option value="">— choose a time —</option>
-<?php
-    for ($hour = $startHour; $hour <= $endHour; $hour++) {
-        for ($min = 0; $min < 60; $min += 20) {
-            if ($hour === $endHour && $min > $endMin) {
-                break;
-            }
-            $value = sprintf("%02d:%02d", $hour, $min);
-            $selected = $value === $timeValue ? ' selected' : '';
-            echo '          <option value="' . $value . '"' . $selected . '>' . $value . '</option>' . "\n";
-        }
-    }
-?>
+          <option value="">— choose an available time —</option>
+<?php foreach ($available as $time): ?>
+          <option value="<?= h($time) ?>"<?= $time === $selectedTime ? ' selected' : '' ?>><?= h(time_label($time)) ?></option>
+<?php endforeach; ?>
         </select>
+        <span class="input-error" data-error="Please choose a time."></span>
 
-        <p class="form-msg <?= $error !== '' ? 'error' : '' ?>"><?= htmlspecialchars($error) ?></p>
-        <p class="form-msg <?= $notice !== '' ? 'success' : '' ?>"><?= htmlspecialchars($notice) ?></p>
-
+<?php if (count($available) === 0): ?>
+        <p class="form-msg error">No available slots on this date.</p>
+<?php else: ?>
         <button type="submit">Save new date</button>
+<?php endif; ?>
       </form>
-
-      <script>
-        // Grey out slots already booked for this doctor and date.
-        (function () {
-          const dateInput = document.getElementById("date");
-          const timeSelect = document.getElementById("start");
-          const doctor = <?= json_encode($booking['doctor']) ?>;
-          const ownDate = <?= json_encode(substr($booking['slot_start'], 0, 10)) ?>;
-          const ownTime = <?= json_encode(substr($booking['slot_start'], 11, 5)) ?>;
-
-          function refreshTaken() {
-            const date = dateInput.value;
-
-            for (const opt of timeSelect.options) {
-              opt.disabled = false;
-            }
-            if (!date) {
-              return;
-            }
-
-            fetch("api/taken.php?date=" + encodeURIComponent(date) +
-                  "&doctor=" + encodeURIComponent(doctor))
-              .then(r => r.text())
-              .then(text => {
-                const taken = text ? text.split(",") : [];
-
-                for (const opt of timeSelect.options) {
-                  const mine = date === ownDate && opt.value === ownTime;
-                  if (opt.value && !mine && taken.includes(opt.value)) {
-                    opt.disabled = true;
-                  }
-                }
-
-                const selected = timeSelect.selectedOptions[0];
-                if (selected && selected.disabled) {
-                  timeSelect.value = "";
-                }
-              });
-          }
-
-          dateInput.addEventListener("change", refreshTaken);
-          refreshTaken();
-        })();
-      </script>
 <?php endif; ?>
     </section>
-
 <?php else: ?>
     <section class="booking-form">
       <h2>Manage your booking</h2>
-      <p>Enter the booking code from your confirmation to change your appointment date.</p>
-
-      <form method="post">
-        <label for="code">Booking code:</label>
-        <input type="text" id="code" name="code" required
-               value="<?= htmlspecialchars($code) ?>">
-
-        <p class="form-msg <?= $error !== '' ? 'error' : '' ?>"><?= htmlspecialchars($error) ?></p>
-
-        <button type="submit">Find my booking</button>
-      </form>
+      <p class="form-msg error"><?= h($error) ?></p>
+      <p>Open <a href="my_appointments.php">My Appointments</a> to choose a booking to reschedule.</p>
     </section>
 <?php endif; ?>
-
   </main>
 
-  <a class="book-tab" href="booking.html">Book Now</a>
-
+  <a class="book-tab" href="booking.php">Book Now</a>
 </body>
 </html>

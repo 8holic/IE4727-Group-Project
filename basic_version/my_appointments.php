@@ -1,0 +1,93 @@
+<?php
+require __DIR__ . '/includes/auth.php';
+require __DIR__ . '/includes/booking_rules.php';
+require_patient('my_appointments.php');
+
+$conn = db();
+$stmt = mysqli_prepare($conn,
+    'SELECT id, doctor, slot_start, status FROM appointments
+     WHERE patient_id = ? ORDER BY slot_start DESC');
+mysqli_stmt_bind_param($stmt, 'i', $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+$appointments = mysqli_stmt_get_result($stmt);
+
+$message = get_str('message');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Appointments | J&amp;B Family Clinic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top-header">
+    <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+      <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a class="active" href="my_appointments.php">My Appointments</a></li>
+        <li><a href="logout.php">Logout</a></li>
+        <li><a class="book-now" href="booking.php">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="staff-head">
+      <div>
+        <p class="eyebrow">PATIENT ACCOUNT</p>
+        <h1>My Appointments</h1>
+        <p>Logged in as <?= h($_SESSION['user_name']) ?>.</p>
+      </div>
+      <a class="book-now" href="booking.php">New Appointment</a>
+    </div>
+
+    <?php if ($message !== ''): ?>
+      <p class="form-msg success"><?= h($message) ?></p>
+    <?php endif; ?>
+
+    <div class="table-wrap">
+      <table class="appointments">
+        <thead>
+          <tr><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+<?php if (mysqli_num_rows($appointments) === 0): ?>
+          <tr><td colspan="5">You do not have any appointments yet.</td></tr>
+<?php else: ?>
+<?php while ($row = mysqli_fetch_assoc($appointments)): ?>
+          <tr>
+            <td><?= h($row['doctor']) ?></td>
+            <td><?= h(date('D, j M Y', strtotime($row['slot_start']))) ?></td>
+            <td><?= h(date('g:i A', strtotime($row['slot_start']))) ?></td>
+            <td><span class="status status-<?= h($row['status']) ?>"><?= h($row['status']) ?></span></td>
+            <td>
+<?php if ($row['status'] === 'booked' && strtotime($row['slot_start']) >= time()): ?>
+              <a href="manage.php?id=<?= (int) $row['id'] ?>">Reschedule</a> |
+              <a href="cancel.php?id=<?= (int) $row['id'] ?>">Cancel</a>
+<?php else: ?>
+              —
+<?php endif; ?>
+            </td>
+          </tr>
+<?php endwhile; ?>
+<?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <a class="book-tab" href="booking.php">Book Now</a>
+</body>
+</html>
+<?php
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+?>

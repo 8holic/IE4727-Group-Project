@@ -488,22 +488,21 @@ body {
 }
 
 .booking-form label {
-  display: inline-block;
-  width: 110px;
+  display: block;
+  margin: 0.75rem 0 0.25rem;
   font-weight: 600;
   color: var(--text);
-  vertical-align: middle;
 }
 
-.booking-form input,
+.booking-form input:not([type="hidden"]),
 .booking-form select {
-  width: calc(100% - 130px);
+  display: block;
+  width: 100%;
   padding: 0.45rem 0.6rem;
   font-size: 1rem;
   border: 1px solid #bbb;
   border-radius: 6px;
   font-family: inherit;
-  vertical-align: middle;
 }
 
 .booking-form input:focus,
@@ -511,6 +510,27 @@ body {
   outline: none;
   border-color: var(--brand);
   box-shadow: 0 0 0 3px rgba(38, 119, 111, 0.25);
+}
+
+.booking-form input:user-invalid,
+.booking-form input[placeholder]:not(:placeholder-shown):invalid,
+.booking-form select:user-invalid {
+  border-color: var(--cta);
+}
+
+.input-error {
+  display: block;
+  color: var(--cta);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.booking-form input:user-invalid + .input-error::before,
+.booking-form input[placeholder]:not(:placeholder-shown):invalid + .input-error::before,
+.booking-form select:user-invalid + .input-error::before {
+  content: attr(data-error);
+  display: block;
+  margin: 0.2rem 0 0.45rem;
 }
 
 .booking-form button {
@@ -548,6 +568,11 @@ body {
   color: #155724;
 }
 
+.form-msg.info {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
 .form-msg.error {
   background: #f8d7da;
   color: #721c24;
@@ -555,7 +580,7 @@ body {
 
 .field-error {
   min-height: 1.05rem;
-  margin: 0.2rem 0 0 110px;
+  margin: 0.2rem 0 0;
   color: var(--cta);
   font-size: 0.85rem;
 }
