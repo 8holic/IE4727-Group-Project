@@ -568,6 +568,127 @@ body {
   color: var(--brand-dark);
 }
 
+/* Doctor dashboard */
+.staff-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--brand-dark);
+  font-weight: 600;
+}
+
+.staff-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+}
+
+.staff-head h1 {
+  margin: 0;
+  color: var(--text);
+}
+
+.table-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.appointments {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.appointments th,
+.appointments td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.appointments th {
+  background: var(--soft);
+  color: var(--brand-dark);
+  white-space: nowrap;
+}
+
+.appointments tr:last-child td {
+  border-bottom: none;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--brand-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-completed {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.cancel-form,
+.reschedule-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cancel-form input[type="text"],
+.reschedule-form input[type="date"],
+.reschedule-form select {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.cancel-form input[type="text"] {
+  width: 150px;
+}
+
+.reschedule-form input[type="date"] {
+  width: 145px;
+}
+
+.reschedule-form select {
+  width: 85px;
+}
+
+.cancel-form button,
+.reschedule-form button {
+  padding: 0.35rem 0.7rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--cta);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel-form button:hover,
+.reschedule-form button:hover {
+  background: var(--cta-dark);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .info-card,
@@ -620,5 +741,15 @@ body {
 
   .doctor-card {
     flex-direction: column;
+  }
+
+  .staff-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .staff-bar {
+    gap: 8px;
+    font-size: 0.85rem;
   }
 }

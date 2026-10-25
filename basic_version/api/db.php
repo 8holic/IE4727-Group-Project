@@ -1,10 +1,6 @@
 <?php
 require __DIR__ . '/booking_rules.php';
-
-// Sender mailbox configured in Mercury (XAMPP). Local mailboxes are @localhost.
-// Without a relay host, Mercury only delivers to local addresses such as
-// deepseek@localhost.net (a plain @localhost is rejected by the form's email check).
-const CLINIC_MAIL_FROM = "deepseek@localhost";
+require __DIR__ . '/mail.php';
 
 $conn = db();
 
@@ -55,10 +51,7 @@ function new_booking_code($conn) {
 $code = new_booking_code($conn);
 
 function send_booking_email($name, $email, $doctor, $start, $code) {
-    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    // dirname() returns backslashes on Windows, so normalise to URL slashes.
-    $root = str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME'] ?? '/api/db.php')));
-    $base = rtrim("http://" . $host . $root, "/");
+    $base = site_base();
     $manage = $base . "/manage.php?code=" . urlencode($code);
 
     $when = date("D, j M Y, g:i A", strtotime($start)) . " (SGT)";
@@ -75,10 +68,7 @@ function send_booking_email($name, $email, $doctor, $start, $code) {
           . "See you soon,\n"
           . "J&B Family Clinic\n";
 
-    $headers = "From: \"J&B Family Clinic\" <" . CLINIC_MAIL_FROM . ">\r\n"
-             . "Content-Type: text/plain; charset=UTF-8\r\n";
-
-    return @mail($email, "Booking confirmed - " . $code, $body, $headers);
+    return send_mail($email, "Booking confirmed - " . $code, $body);
 }
 
 $sql = "INSERT INTO appointments
