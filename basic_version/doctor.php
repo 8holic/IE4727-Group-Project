@@ -231,12 +231,28 @@ if (!doctor_logged_in()) {
 </head>
 <body>
 
-  <header class="top-header">
+  <!--<header class="top-header">
     <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
       <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
     </a>
-  </header>
+  </header>-->
+    <header class="top-header">
+    <a class="logo-link" href="index.html" aria-label="J&B Family Clinic Home">
+        <img class="clinic-logo" src="assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
 
+    <nav class="top-nav" aria-label="Main navigation">
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="login.php">Patient Login</a></li>
+        <li><a class="active" href="doctor.php">Employee Login</a></li>
+        <li><a class="book-now" href="booking.php">Book Now</a></li>
+        </ul>
+    </nav>
+    </header>
   <main class="page">
     <section class="booking-form">
       <h2>Employee Login</h2>
@@ -320,20 +336,20 @@ for ($hour = $openHour; $hour <= $closeHour; $hour++) {
 
   <main class="page">
 
-    <!--<div class="staff-head">
+    <div class="staff-head">
       <div>
         <p class="eyebrow">STAFF</p>
         <h1>Appointments</h1>
       </div>    
-    </div>-->
+    </div>
 
-    <div class="staff-head">
+    <!--<div class="staff-head">
         <div>
             <p class="eyebrow">STAFF PORTAL</p>
             <h1>Appointments</h1>
             <p>Signed in as <?= h($_SESSION['doctor_name'] ?? '') ?></p>
         </div>
-    </div>
+    </div>-->
 
     <p class="form-msg <?= $notice !== '' ? 'success' : '' ?>"><?= h($notice) ?></p>
     <p class="form-msg <?= $error !== '' ? 'error' : '' ?>"><?= h($error) ?></p>
