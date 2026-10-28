@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+<% if (booking) { %>
+    <section class="booking-form">
+      <h2>Manage your booking</h2>
+
+      <p>
+        <strong>Patient:</strong> <%= booking.patient_name %><br>
+        <strong>Doctor:</strong> <%= booking.doctor %><br>
+        <strong>Current appointment:</strong>
+        <%= dateTimeLabel(booking.slot_start) %>
+      </p>
+
+<% if (booking.status !== 'booked') { %>
+      <p class="form-msg error">This booking has been cancelled and can no longer be changed.</p>
+<% } else { %>
+<% if (error !== '') { %>
+      <p class="form-msg error"><%= error %></p>
+<% } %>
+
+      <form method="get" action="/manage">
+        <input type="hidden" name="id" value="<%= booking.id %>">
+
+        <label for="date">New date:</label>
+        <input type="date" id="date" name="date" required
+               min="<%= minDate %>" max="<%= maxDate %>"
+               value="<%= selectedDate %>">
+        <span class="input-error" data-error="Please choose a date."></span>
+
+        <button type="submit">Check times</button>
+      </form>
+
+      <form method="post" action="/manage">
+        <input type="hidden" name="id" value="<%= booking.id %>">
+        <input type="hidden" name="date" value="<%= selectedDate %>">
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="csrf" value="<%= csrfToken %>">
+
+        <label for="start">New time:</label>
+        <select id="start" name="start" required>
+          <option value="">— choose an available time —</option>
+<% available.forEach((time) => { %>
+          <option value="<%= time %>"<%= time === selectedTime ? ' selected' : '' %>><%= timeLabel(time) %></option>
+<% }) %>
+        </select>
+        <span class="input-error" data-error="Please choose a time."></span>
+
+<% if (available.length === 0) { %>
+        <p class="form-msg error">No available slots on this date.</p>
+<% } else { %>
+        <button type="submit">Save new date</button>
+<% } %>
+      </form>
+<% } %>
+    </section>
+<% } else { %>
+    <section class="booking-form">
+      <h2>Manage your booking</h2>
+      <p class="form-msg error"><%= error %></p>
+      <p>Open <a href="/my-appointments">My Appointments</a> to choose a booking to reschedule.</p>
+    </section>
+<% } %>
+  </main>
+
+<%- include('partials/footer') %>

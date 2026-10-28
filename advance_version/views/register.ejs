@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+    <form class="booking-form" method="post" action="/register">
+      <h2>Patient Registration</h2>
+      <p>Create an account before booking an appointment.</p>
+
+      <input type="hidden" name="csrf" value="<%= csrfToken %>">
+      <input type="hidden" name="next" value="<%= next %>">
+
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required maxlength="100"
+             placeholder="Full name" autocomplete="name"
+             value="<%= form.name || '' %>">
+      <span class="input-error" data-error="Please enter your name."></span>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required maxlength="150"
+             autocomplete="email" placeholder="name@example.com"
+             pattern="[A-Za-z0-9._%+\-]+@(?:[A-Za-z0-9\-]+\.)+[A-Za-z]{2,}|[A-Za-z0-9._%+\-]+@localhost"
+             title="Enter an email like name@example.com."
+             value="<%= form.email || '' %>">
+      <span class="input-error" data-error="Email must contain one @ and a valid domain, e.g. name@example.com."></span>
+
+      <label for="phone">Phone (+65):</label>
+      <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel"
+             pattern="(?:\+?65)?[\s\-]?[89][0-9]{3}[\s\-]?[0-9]{4}"
+             placeholder="+65 9123 4567"
+             title="Enter a Singapore number: +65 followed by 8 digits starting with 8 or 9."
+             required value="<%= form.phone || '' %>">
+      <span class="input-error" data-error="Enter a Singapore number: +65 and 8 digits starting with 8 or 9."></span>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required minlength="8"
+             placeholder="At least 8 characters" autocomplete="new-password">
+      <span class="input-error" data-error="Password must be at least 8 characters."></span>
+
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="confirm_password" name="confirm_password" required minlength="8"
+             placeholder="Re-enter password" autocomplete="new-password">
+      <span class="input-error" data-error="Password must be at least 8 characters."></span>
+
+      <button type="submit">Register</button>
+
+      <p class="form-msg <%= messageClass %>"><%= message %></p>
+
+      <p>Already registered? <a href="/login?next=<%= encodeURIComponent(next) %>">Log in here</a>.</p>
+    </form>
+  </main>
+
+<%- include('partials/footer') %>

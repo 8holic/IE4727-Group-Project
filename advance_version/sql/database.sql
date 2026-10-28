@@ -1,16 +1,16 @@
 -- database.sql
 -- J&B Family Clinic booking system: complete fresh database.
--- WARNING: this DROPS the existing jnb_clinic database and recreates it.
+-- WARNING: this DROPS the existing jnb_clinic_advance database and recreates it.
 -- Import via phpMyAdmin (Import tab), or:
---   mysql -u root < basic_version/sql/database.sql
+--   mysql -u root < advance_version/sql/database.sql
 
-DROP DATABASE IF EXISTS jnb_clinic;
+DROP DATABASE IF EXISTS jnb_clinic_advance;
 
-CREATE DATABASE jnb_clinic
+CREATE DATABASE jnb_clinic_advance
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE jnb_clinic;
+USE jnb_clinic_advance;
 
 CREATE TABLE doctors (
   id            INT AUTO_INCREMENT PRIMARY KEY,

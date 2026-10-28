@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+    <div class="staff-head">
+      <div>
+        <p class="eyebrow">PATIENT ACCOUNT</p>
+        <h1>My Appointments</h1>
+        <p>Logged in as <%= currentUser.name %>.</p>
+      </div>
+      <a class="book-now" href="/booking">New Appointment</a>
+    </div>
+
+<% if (message !== '') { %>
+    <p class="form-msg success"><%= message %></p>
+<% } %>
+
+    <div class="table-wrap">
+      <table class="appointments">
+        <thead>
+          <tr><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+<% if (appointments.length === 0) { %>
+          <tr><td colspan="5">You do not have any appointments yet.</td></tr>
+<% } else { %>
+<% appointments.forEach((row) => { %>
+          <tr>
+            <td><%= row.doctor %></td>
+            <td><%= dateLabel(row.slot_start) %></td>
+            <td><%= timeLabel12(row.slot_start) %></td>
+            <td><span class="status status-<%= row.status %>"><%= row.status %></span></td>
+            <td>
+<% if (row.status === 'booked' && isFuture(row.slot_start)) { %>
+              <a href="/manage?id=<%= row.id %>">Reschedule</a> |
+              <a href="/cancel?id=<%= row.id %>">Cancel</a>
+<% } else { %>
+              —
+<% } %>
+            </td>
+          </tr>
+<% }) %>
+<% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+<%- include('partials/footer') %>

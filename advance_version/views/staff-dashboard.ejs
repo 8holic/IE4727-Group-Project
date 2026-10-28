@@ -1,0 +1,79 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+    <div class="staff-head">
+      <div>
+        <p class="eyebrow">STAFF</p>
+        <h1>Appointments</h1>
+      </div>
+      <div class="staff-bar">
+        <span>Signed in as <%= currentDoctor.name %></span>
+        <a class="book-now" href="/staff?logout=1">Log out</a>
+      </div>
+    </div>
+
+    <p class="form-msg <%= notice !== '' ? 'success' : '' %>"><%= notice %></p>
+    <p class="form-msg <%= error !== '' ? 'error' : '' %>"><%= error %></p>
+
+    <div class="table-wrap">
+      <table class="appointments">
+        <thead>
+          <tr>
+            <th>Date and time</th>
+            <th>Patient</th>
+            <th>Contact</th>
+            <th>Doctor</th>
+            <th>Status</th>
+            <th>Reschedule</th>
+            <th>Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+<% appointments.forEach((appointment) => { %>
+          <tr>
+            <td><%= dateTimeLabel(appointment.slot_start) %></td>
+            <td><%= appointment.patient_name %></td>
+            <td>
+              <%= appointment.patient_email %>
+<% if (appointment.phone) { %><br><%= appointment.phone %><% } %>
+            </td>
+            <td><%= appointment.doctor %></td>
+            <td><span class="status status-<%= appointment.status %>"><%= appointment.status %></span></td>
+            <td>
+<% if (appointment.status === 'booked' && isFuture(appointment.slot_start)) { %>
+              <form method="post" class="reschedule-form" action="/staff">
+                <input type="hidden" name="action" value="reschedule">
+                <input type="hidden" name="id" value="<%= appointment.id %>">
+                <input type="hidden" name="csrf" value="<%= csrfToken %>">
+                <input type="date" name="date" required
+                       min="<%= minDate %>" max="<%= maxDate %>"
+                       value="<%= appointment.slot_start.slice(0, 10) %>">
+                <select name="start" required>
+                  <option value="">Time</option>
+<% slotTimes.forEach((time) => { %>
+                  <option value="<%= time %>"<%= time === appointment.slot_start.slice(11, 16) ? ' selected' : '' %>><%= time %></option>
+<% }) %>
+                </select>
+                <button type="submit">Save</button>
+              </form>
+<% } %>
+            </td>
+            <td>
+<% if (appointment.status === 'booked') { %>
+              <form method="post" class="cancel-form" action="/staff">
+                <input type="hidden" name="action" value="cancel">
+                <input type="hidden" name="id" value="<%= appointment.id %>">
+                <input type="hidden" name="csrf" value="<%= csrfToken %>">
+                <input type="text" name="reason" maxlength="500" placeholder="Reason" required>
+                <button type="submit">Cancel</button>
+              </form>
+<% } %>
+            </td>
+          </tr>
+<% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+<%- include('partials/footer', { showBookTab: false }) %>

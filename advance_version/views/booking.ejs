@@ -1,0 +1,89 @@
+<%- include('partials/header') %>
+
+  <section class="clinic-hero clinic-hero--home" aria-label="Book an appointment">
+    <div class="clinic-hero-overlay">
+      <div class="clinic-hero-text">
+        <p>J&amp;B FAMILY CLINIC</p>
+        <h1>Ready to book?</h1>
+        <span>Your health is our priority.</span>
+      </div>
+    </div>
+  </section>
+
+  <a class="book-tab" href="/booking">Book Now</a>
+
+  <main class="page">
+    <form class="booking-form" method="get" action="/booking">
+      <h2>1. Check Doctor Schedule</h2>
+
+      <label for="doctor">Doctor:</label>
+      <select id="doctor" name="doctor" required>
+        <option value="">— choose a doctor —</option>
+<% Object.entries(doctors).forEach(([name, doctor]) => { %>
+        <option value="<%= name %>"<%= name === selectedDoctor ? ' selected' : '' %>><%= doctor.label %></option>
+<% }) %>
+      </select>
+      <span class="input-error" data-error="Please choose a doctor."></span>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required
+             min="<%= today %>" max="<%= maxDate %>"
+             value="<%= selectedDate %>">
+      <span class="input-error" data-error="Please choose a date."></span>
+
+      <button type="submit">Show Available Times</button>
+
+<% if (selectedDoctor !== '' && doctors[selectedDoctor]) { %>
+      <p>
+        <%= selectedDoctor %> consults on <%= doctorDaysText(selectedDoctor) %>,
+        <%= timeLabel(openStart) %>–<%= timeLabel(openEnd) %> (SGT).
+      </p>
+<% } %>
+
+<% if (displayError !== '') { %>
+      <p class="form-msg error"><%= displayError %></p>
+<% } %>
+    </form>
+
+<% if (selectedDoctor !== '' && selectedDate !== '' && scheduleError === '') { %>
+<% if (available.length === 0) { %>
+    <section class="booking-form">
+      <h2>2. Confirm Appointment</h2>
+      <p class="form-msg error">No available slots for this doctor on this date.</p>
+    </section>
+<% } else { %>
+    <form class="booking-form" method="post" action="/booking">
+      <input type="hidden" name="csrf" value="<%= csrfToken %>">
+      <input type="hidden" name="doctor" value="<%= selectedDoctor %>">
+      <input type="hidden" name="date" value="<%= selectedDate %>">
+
+      <h2>2. Confirm Appointment</h2>
+
+      <p><strong>Patient:</strong> <%= patient.name %></p>
+      <p><strong>Doctor:</strong> <%= selectedDoctor %></p>
+      <p><strong>Date:</strong> <%= dateLabel(selectedDate + ' 00:00:00') %></p>
+
+      <label for="start">Time:</label>
+      <select id="start" name="start" required>
+        <option value="">— choose an available time —</option>
+<% available.forEach((time) => { %>
+        <option value="<%= time %>"<%= time === selectedTime ? ' selected' : '' %>><%= timeLabel(time) %></option>
+<% }) %>
+      </select>
+      <span class="input-error" data-error="Please choose a time."></span>
+
+      <label for="phone">Phone (+65):</label>
+      <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel"
+             pattern="(?:\+?65)?[\s\-]?[89][0-9]{3}[\s\-]?[0-9]{4}"
+             placeholder="+65 9123 4567"
+             title="Enter a Singapore number: +65 followed by 8 digits starting with 8 or 9."
+             required value="<%= phoneValue %>">
+      <span class="input-error" data-error="Enter a Singapore number: +65 and 8 digits starting with 8 or 9."></span>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+<% } %>
+<% } %>
+  </main>
+
+<%- include('partials/footer') %>

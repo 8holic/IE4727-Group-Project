@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+    <section class="booking-form">
+      <h2>Employee Login</h2>
+      <p>Clinic staff sign in here.</p>
+
+      <form method="post" action="/staff">
+        <input type="hidden" name="action" value="login">
+        <input type="hidden" name="csrf" value="<%= csrfToken %>">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required
+               autocomplete="email" placeholder="name@example.com"
+               pattern="[A-Za-z0-9._%+\-]+@(?:[A-Za-z0-9\-]+\.)+[A-Za-z]{2,}|[A-Za-z0-9._%+\-]+@localhost"
+               title="Enter an email like name@example.com.">
+        <span class="input-error" data-error="Email must contain one @ and a valid domain, e.g. name@example.com."></span>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required
+               placeholder="Password" autocomplete="current-password">
+        <span class="input-error" data-error="Enter your password."></span>
+
+        <p class="form-msg <%= error !== '' ? 'error' : '' %>"><%= error %></p>
+
+        <button type="submit">Log In</button>
+      </form>
+
+      <p>Patient? <a href="/login">Patient Login</a>.</p>
+    </section>
+  </main>
+
+<%- include('partials/footer') %>

@@ -1,58 +1,77 @@
-J&B Family Clinic - local setup notes
-=====================================
+J&B Family Clinic - advanced version setup
+==========================================
 
 Requirements
 ------------
-XAMPP with Apache, MySQL, and Mercury Mail running.
+Node.js 18 or newer.
+XAMPP with MySQL running.
+Mercury Mail running if you want email delivery. Bookings still work without it.
+
+Install
+-------
+cd advance_version
+npm install
 
 Database
 --------
-Import basic_version/sql/database.sql.
-This DROPS and recreates the jnb_clinic database.
+Import advance_version/sql/database.sql.
+This DROPS and recreates the jnb_clinic_advance database.
+The basic version keeps using jnb_clinic.
+
+Defaults:
+  Host: localhost
+  User: root
+  Password: (empty)
+  Database: jnb_clinic_advance
+
+Override with DB_HOST, DB_USER, DB_PASSWORD and DB_NAME if needed.
+
+Run
+---
+cd advance_version
+npm start
+Open http://localhost:3000
+
+Tests
+-----
+npm test
 
 Employee login
 --------------
-The Employee Login link in the navigation opens doctor.php.
-
-  http://localhost/basic_version/doctor.php
+http://localhost:3000/staff
 
   bryan@localhost.net  / bryan123
   javier@localhost.net / javier123
 
-Patients register through register.php and sign in through login.php.
+Patients register at http://localhost:3000/register and sign in at
+http://localhost:3000/login.
 
 Email
 -----
-Mercury local domains:
+Nodemailer sends through Mercury SMTP on localhost:25.
+Sender: jnb@localhost.net
+
+Allowed local domains:
   localhost
   localhost.net
   localhost.org
   localhost.com
 
-The application only sends to those domains. External addresses are blocked
-by includes/mail.php before mail() is called.
+External addresses are blocked before sending. A failed email does not cancel
+a booking; the confirmation page reports the status.
 
-Sender: jnb@localhost.net
-
-The sender must be an existing Mercury user. Otherwise Mercury rejects the
-message with "invalid or illegal from address".
-
-For delivery testing, use an existing Mercury mailbox such as:
-  1234@localhost.net
+The sender must be an existing Mercury user, otherwise Mercury rejects the
+message with "invalid or illegal from address". For delivery testing, use an
+existing mailbox such as 1234@localhost.net.
 
 Mercury user mailboxes are stored in C:\xampp\MercuryMail\MAIL.
 The user list is C:\xampp\MercuryMail\MAIL\PMAIL.USR in the form:
   U;username;Full Name
 
-To add a mailbox:
-  1. Stop Mercury.
-  2. Back up MAIL\PMAIL.USR and the MAIL folder.
-  3. Create MAIL\<username>\PASSWD.PM.
-  4. Append U;<username>;<Full Name> to PMAIL.USR.
-  5. Start Mercury.
-
-PASSWD.PM is only needed for POP3/IMAP login; mail delivery does not require
-a password.
+Environment overrides
+---------------------
+PORT, SESSION_SECRET, SITE_BASE, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME,
+SMTP_HOST, SMTP_PORT, MAIL_FROM.
 
 Notes
 -----

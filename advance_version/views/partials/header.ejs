@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | J&amp;B Family Clinic</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top-header">
+    <a class="logo-link" href="/" aria-label="J&B Family Clinic Home">
+      <img class="clinic-logo" src="/assets/logo.png" alt="J&B Family Clinic logo">
+    </a>
+
+    <nav class="top-nav" aria-label="Main navigation">
+      <ul>
+        <li><a class="<%= active === 'home' ? 'active' : '' %>" href="/">Home</a></li>
+        <li><a class="<%= active === 'about' ? 'active' : '' %>" href="/about">About Us</a></li>
+        <li><a class="<%= active === 'service' ? 'active' : '' %>" href="/service">Services</a></li>
+        <li><a class="<%= active === 'location' ? 'active' : '' %>" href="/location">Location</a></li>
+        <li><a class="<%= active === 'appointments' ? 'active' : '' %>" href="/my-appointments">My Appointments</a></li>
+        <li><a class="<%= active === 'login' ? 'active' : '' %>" href="/login">Patient Login</a></li>
+        <li><a class="<%= active === 'staff' ? 'active' : '' %>" href="/staff">Employee Login</a></li>
+        <li><a class="book-now" href="/booking">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
