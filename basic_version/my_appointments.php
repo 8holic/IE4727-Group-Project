@@ -4,11 +4,150 @@ require __DIR__ . '/includes/booking_rules.php';
 require_patient('my_appointments.php');
 
 $conn = db();
-$stmt = mysqli_prepare($conn,
-    'SELECT id, doctor, slot_start, status FROM appointments
-     WHERE patient_id = ? ORDER BY slot_start DESC');
+
+$message = get_str('message');
+$messageClass = $message !== '' ? 'success' : '';
+
+// Load current patient profile
+$stmt = mysqli_prepare(
+    $conn,
+    'SELECT name, email, phone FROM patients WHERE id = ?'
+);
+
 mysqli_stmt_bind_param($stmt, 'i', $_SESSION['user_id']);
 mysqli_stmt_execute($stmt);
+
+$patient = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+mysqli_stmt_close($stmt);
+
+if (!$patient) {
+    logout_user();
+    header('Location: login.php');
+    exit;
+}
+
+
+// Update profile
+if ($_SERVER['REQUEST_METHOD'] === 'POST'
+    && ($_POST['action'] ?? '') === 'update_profile') {
+
+    $name = post_str('name');
+    $phone = post_str('phone');
+
+    if (!csrf_ok()) {
+
+        $message = 'Your session expired. Please refresh the page and try again.';
+        $messageClass = 'error';
+
+    } elseif ($name === '') {
+
+        $message = 'Please enter your full name.';
+        $messageClass = 'error';
+
+    } elseif (strlen($name) < 2 || strlen($name) > 100) {
+
+        $message = 'Name must contain between 2 and 100 characters.';
+        $messageClass = 'error';
+
+    } elseif ($phone === '') {
+
+        $message = 'Please enter your mobile number.';
+        $messageClass = 'error';
+
+    } elseif (($phoneError = validate_phone($phone)) !== '') {
+
+        $message =
+            'Please enter a valid Singapore mobile number (8 digits, starting with 8 or 9).';
+
+        $messageClass = 'error';
+
+    } else {
+
+        try {
+
+            mysqli_begin_transaction($conn);
+
+            // Update patient account
+            $stmt = mysqli_prepare(
+                $conn,
+                'UPDATE patients SET name = ?, phone = ? WHERE id = ?'
+            );
+
+            mysqli_stmt_bind_param(
+                $stmt,
+                'ssi',
+                $name,
+                $phone,
+                $_SESSION['user_id']
+            );
+
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+
+            // Update existing appointments so doctor dashboard shows latest details
+            $stmt = mysqli_prepare(
+                $conn,
+                'UPDATE appointments
+                 SET patient_name = ?, phone = ?
+                 WHERE patient_id = ?'
+            );
+
+            mysqli_stmt_bind_param(
+                $stmt,
+                'ssi',
+                $name,
+                $phone,
+                $_SESSION['user_id']
+            );
+
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+            mysqli_commit($conn);
+
+            $_SESSION['user_name'] = $name;
+
+            $patient['name'] = $name;
+            $patient['phone'] = $phone;
+
+            $message = 'Profile updated successfully.';
+            $messageClass = 'success';
+
+        } catch (mysqli_sql_exception $e) {
+
+            mysqli_rollback($conn);
+
+            $message = 'Profile could not be updated. Please try again.';
+            $messageClass = 'error';
+        }
+    }
+
+    if ($messageClass === 'error') {
+        $patient['name'] = $name;
+        $patient['phone'] = $phone;
+    }
+}
+
+
+// Existing appointment query
+$stmt = mysqli_prepare(
+    $conn,
+    'SELECT id, doctor, slot_start, status
+     FROM appointments
+     WHERE patient_id = ?
+     ORDER BY slot_start DESC'
+);
+
+mysqli_stmt_bind_param(
+    $stmt,
+    'i',
+    $_SESSION['user_id']
+);
+
+mysqli_stmt_execute($stmt);
+
 $appointments = mysqli_stmt_get_result($stmt);
 
 $message = get_str('message');
