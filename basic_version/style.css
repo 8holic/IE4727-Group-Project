@@ -778,3 +778,53 @@ body {
     font-size: 0.85rem;
   }
 }
+/* =========================================================
+   EDIT PROFILE
+   ========================================================= */
+
+.edit-profile-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+
+  background: #ffffff;
+  color: #28786f;
+
+  border: 1px solid #28786f;
+  border-radius: 6px;
+
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.edit-profile-btn:hover {
+  background: #28786f;
+  color: #ffffff;
+}
+
+
+.edit-profile-form {
+  max-width: 650px;
+  margin: 40px auto;
+}
+
+
+.edit-profile-form input[readonly] {
+  background: #eef2f2;
+  color: #667477;
+  cursor: not-allowed;
+}
+
+
+.profile-back-link {
+  display: inline-block;
+  margin-left: 15px;
+
+  color: #28786f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.profile-back-link:hover {
+  text-decoration: underline;
+}
