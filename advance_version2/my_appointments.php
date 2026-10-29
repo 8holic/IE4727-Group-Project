@@ -24,6 +24,9 @@ require_once __DIR__ . '/includes/header.php';
         <p class="eyebrow">PATIENT ACCOUNT</p>
         <h1>My Appointments</h1>
         <p>Logged in as <?= h($_SESSION['user_name']) ?>.</p>
+        <a class="edit-profile-btn" href="edit_profile.php">
+          Edit Profile
+        </a>
       </div>
       <a class="book-now" href="booking.php">New Appointment</a>
     </div>
