@@ -1,0 +1,107 @@
+<?php
+$pageTitle = 'About Us';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<section class="relative isolate overflow-hidden bg-teal-900" aria-label="J&B Family Clinic introduction">
+    <img src="assets/JnB Clinic.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-50">
+    <div class="relative mx-auto flex min-h-[300px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-100">J&amp;B FAMILY CLINIC</p>
+        <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">Quality Healthcare For You and Your Family</h1>
+        <p class="mt-3 text-lg text-teal-50">Friendly, dependable primary care for every stage of life.</p>
+    </div>
+</section>
+
+<main class="mx-auto max-w-7xl space-y-16 px-4 py-12 sm:px-6 lg:px-8">
+    <section class="grid items-center gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:grid-cols-2 lg:p-10">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">ABOUT US</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Care you can feel comfortable coming back to.</h2>
+            <p class="mt-4 leading-relaxed text-slate-600">
+                J&amp;B Family Clinic provides convenient and dependable primary healthcare
+                for individuals and families. We focus on clear communication, practical
+                medical advice and continuity of care.
+            </p>
+            <div class="mt-6 border-t border-slate-200 pt-5">
+                <h3 class="font-bold text-teal-800">Our Clinic</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                    J&amp;B Family Clinic was established to make everyday healthcare simple
+                    and approachable. From general consultations and preventive care to
+                    long-term health management, our doctors work with patients to understand
+                    their concerns and provide suitable care plans.
+                </p>
+            </div>
+        </div>
+        <div class="overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+            <img src="assets/JnB Clinic.png" alt="Interior of J&B Family Clinic" class="h-64 w-full object-cover">
+            <div class="bg-teal-900 px-4 py-3 text-white">
+                <strong class="block">J&amp;B Family Clinic</strong>
+                <span class="text-sm text-teal-100">Comfortable care for every stage of life</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label="Our values">
+        <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-sm font-bold text-teal-800">01</span>
+            <div>
+                <h3 class="font-bold text-slate-900">Patient-centred</h3>
+                <p class="mt-1 text-sm text-slate-600">We listen carefully and treat every patient with respect.</p>
+            </div>
+        </div>
+
+        <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-sm font-bold text-teal-800">02</span>
+            <div>
+                <h3 class="font-bold text-slate-900">Clear communication</h3>
+                <p class="mt-1 text-sm text-slate-600">We explain your options in a straightforward and understandable way.</p>
+            </div>
+        </div>
+
+        <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-sm font-bold text-teal-800">03</span>
+            <div>
+                <h3 class="font-bold text-slate-900">Continuity of care</h3>
+                <p class="mt-1 text-sm text-slate-600">We support follow-up and longer-term health management where needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">OUR MEDICAL TEAM</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Meet our doctors</h2>
+            <p class="mt-3 text-slate-600">Get to know the doctors available for consultation at J&amp;B Family Clinic. The clinic is closed on Sundays.</p>
+        </div>
+
+        <div class="mt-8 grid gap-6 lg:grid-cols-2">
+            <article class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-teal-100 text-lg font-bold text-teal-800">BR</div>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">Dr Bryan</h3>
+                    <p class="text-sm font-bold text-teal-700">General Practitioner</p>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                        Dr Bryan has an interest in family medicine, preventive healthcare and
+                        the management of common acute and chronic conditions.
+                    </p>
+                    <p class="mt-3 border-t border-slate-200 pt-3 text-sm text-slate-600"><strong>Consultation:</strong> Mon-Fri, 9:00 AM-6:00 PM</p>
+                </div>
+            </article>
+
+            <article class="flex gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-teal-100 text-lg font-bold text-teal-800">JA</div>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">Dr Javier</h3>
+                    <p class="text-sm font-bold text-teal-700">Family Physician</p>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                        Dr Javier's interests include preventive medicine, family health and
+                        chronic disease management, with an emphasis on clear communication.
+                    </p>
+                    <p class="mt-3 border-t border-slate-200 pt-3 text-sm text-slate-600"><strong>Consultation:</strong> Tue-Sat, 9:00 AM-6:00 PM</p>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

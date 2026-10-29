@@ -1,0 +1,70 @@
+J&B Family Clinic - advanced version setup
+==========================================
+
+Requirements
+------------
+XAMPP with Apache, MySQL, and Mercury Mail running.
+
+Database
+--------
+Import advance_version2/sql/database.sql.
+This DROPS and recreates the jnb_clinic_advance_v2 database.
+The basic version keeps using jnb_clinic.
+
+Employee login
+--------------
+The Employee Login link opens doctor.php.
+
+  http://localhost/advance_version2/doctor.php
+
+  bryan@localhost.net  / bryan123
+  javier@localhost.net / javier123
+
+Patients register through register.php and sign in through login.php.
+
+Tailwind CSS and shared layout
+-----------------------------
+The compiled Tailwind stylesheet is assets/tailwind.css.
+No build step is required to run the application.
+
+Navigation and footer content are stored in includes/site.json and
+rendered by includes/header.php and includes/footer.php.
+
+Email
+-----
+Mercury local domains:
+  localhost
+  localhost.net
+  localhost.org
+  localhost.com
+
+The application only sends to those domains. External addresses are blocked
+before mail() is called.
+
+Sender: jnb@localhost.net
+
+The sender must be an existing Mercury user. Otherwise Mercury rejects the
+message with "invalid or illegal from address".
+
+For delivery testing, use an existing Mercury mailbox such as:
+  1234@localhost.net
+
+Mercury user mailboxes are stored in C:\xampp\MercuryMail\MAIL.
+The user list is C:\xampp\MercuryMail\MAIL\PMAIL.USR in the form:
+  U;username;Full Name
+
+To add a mailbox:
+  1. Stop Mercury.
+  2. Back up MAIL\PMAIL.USR and the MAIL folder.
+  3. Create MAIL\<username>\PASSWD.PM.
+  4. Append U;<username>;<Full Name> to PMAIL.USR.
+  5. Start Mercury.
+
+PASSWD.PM is only needed for POP3/IMAP login; mail delivery does not require
+a password.
+
+Notes
+-----
+Booking window: today through +2 days.
+Appointment slots: every 20 minutes, 09:00 to 17:40.
+Clinic closed Sundays.

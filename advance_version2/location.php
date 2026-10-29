@@ -1,0 +1,47 @@
+<?php
+$pageTitle = 'Location';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<section class="relative isolate overflow-hidden bg-teal-900" aria-label="Find our clinic">
+    <img src="assets/indexbanner.jpg" alt="" class="absolute inset-0 h-full w-full object-cover opacity-60">
+    <div class="relative mx-auto flex min-h-[300px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-100">J&amp;B FAMILY CLINIC</p>
+        <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">Find Our Clinic</h1>
+        <p class="mt-3 text-lg text-teal-50">Your health is our priority.</p>
+    </div>
+</section>
+
+<main class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <section class="grid items-center gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:grid-cols-2 lg:p-10">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">FIND US</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Our Location</h2>
+            <p class="mt-4 leading-relaxed text-slate-600">
+                We look forward to welcoming you to J&amp;B Family Clinic. Visit us for
+                friendly and professional healthcare services.
+            </p>
+
+            <div class="mt-6 border-t border-slate-200 pt-5">
+                <h3 class="font-bold text-teal-800">J&amp;B Family Clinic</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                    <strong>Address:</strong><br>
+                    65 Jurong West, Fictional Singapore Mall,<br>
+                    #02-14 Singapore 123456
+                </p>
+            </div>
+
+            <a class="mt-6 inline-flex rounded-full bg-rose-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-rose-700" href="booking.php">Book an Appointment</a>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+            <img src="assets/ai_clinic_photo1.jpg" alt="Inside J&B Family Clinic" class="h-64 w-full object-cover">
+            <div class="bg-teal-900 px-4 py-3 text-white">
+                <strong class="block">J&amp;B Family Clinic</strong>
+                <span class="text-sm text-teal-100">65 Jurong West, Singapore 123456</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

@@ -1,0 +1,98 @@
+<?php
+$pageTitle = 'Home';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<section class="relative isolate overflow-hidden bg-teal-900" aria-label="Welcome to J&B Family Clinic">
+    <img src="assets/indexbanner.jpg" alt="" class="absolute inset-0 h-full w-full object-cover opacity-60">
+    <div class="relative mx-auto flex min-h-[320px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-100">J&amp;B FAMILY CLINIC</p>
+        <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">Your Health is Our Priority</h1>
+        <p class="mt-3 text-lg text-teal-50">A healthier tomorrow.</p>
+    </div>
+</section>
+
+<main class="mx-auto max-w-7xl space-y-16 px-4 py-12 sm:px-6 lg:px-8">
+    <section class="grid items-center gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:grid-cols-2 lg:p-10">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">WELCOME</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Quality Healthcare for You and Your Family</h2>
+            <p class="mt-4 leading-relaxed text-slate-600">
+                At J&amp;B Family Clinic, we believe that good health leads to a better
+                life. Our team is committed to providing friendly, reliable and
+                personalised care for every patient.
+            </p>
+            <a class="mt-6 inline-flex rounded-full bg-rose-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-rose-700" href="booking.php">Book An Appointment</a>
+        </div>
+        <div class="overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+            <img src="assets/ai_clinic_photo1.jpg" alt="Reception at J&B Family Clinic" class="h-64 w-full object-cover">
+            <div class="bg-teal-900 px-4 py-3 text-white">
+                <strong class="block">J&amp;B Family Clinic</strong>
+                <span class="text-sm text-teal-100">A clean, safe and welcoming environment</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">OUR SERVICES</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">What we offer</h2>
+            <p class="mt-3 text-slate-600">We offer a range of healthcare services to keep you and your family healthy.</p>
+        </div>
+
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">01</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">General Checkups</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Keep track of your health with regular checkups and preventive care.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">02</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Preventive Care</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Stay healthy and help prevent future illness with practical advice.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">03</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Expert Professionals</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Receive care from experienced and caring medical staff.</p>
+            </article>
+        </div>
+    </section>
+
+    <section>
+        <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">WHY CHOOSE US</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Care you can rely on</h2>
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-700 text-sm font-bold text-white">01</span>
+                <div>
+                    <h3 class="font-bold text-slate-900">Safe and Comfortable</h3>
+                    <p class="mt-1 text-sm text-slate-600">A clean, safe and welcoming environment for every patient.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-700 text-sm font-bold text-white">02</span>
+                <div>
+                    <h3 class="font-bold text-slate-900">Friendly and Personalised</h3>
+                    <p class="mt-1 text-sm text-slate-600">We take the time to understand every patient we see.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-700 text-sm font-bold text-white">03</span>
+                <div>
+                    <h3 class="font-bold text-slate-900">Reliable Care</h3>
+                    <p class="mt-1 text-sm text-slate-600">Dependable healthcare for you and your family, every visit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

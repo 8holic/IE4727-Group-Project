@@ -1,0 +1,105 @@
+<?php
+$pageTitle = 'Services';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<section class="relative isolate overflow-hidden bg-teal-900" aria-label="Our services">
+    <img src="assets/JnB Clinic.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-50">
+    <div class="relative mx-auto flex min-h-[300px] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-100">J&amp;B FAMILY CLINIC</p>
+        <h1 class="mt-3 text-4xl font-bold text-white sm:text-5xl">Our Services</h1>
+        <p class="mt-3 text-lg text-teal-50">Everyday healthcare for you and your family.</p>
+    </div>
+</section>
+
+<main class="mx-auto max-w-7xl space-y-16 px-4 py-12 sm:px-6 lg:px-8">
+    <section class="grid items-center gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm lg:grid-cols-2 lg:p-10">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">OUR SERVICES</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Everyday healthcare for you and your family.</h2>
+            <p class="mt-4 leading-relaxed text-slate-600">
+                From general consultations to preventive care and long-term health
+                management, J&amp;B Family Clinic provides essential primary care services in one
+                convenient location.
+            </p>
+        </div>
+        <div class="overflow-hidden rounded-2xl bg-slate-100 shadow-sm">
+            <img src="assets/JnB Clinic.png" alt="J&B Family Clinic" class="h-64 w-full object-cover">
+        </div>
+    </section>
+
+    <section>
+        <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">WHAT WE OFFER</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">Our clinic services</h2>
+            <p class="mt-3 text-slate-600">Select the type of care you need before booking an appointment with our doctors.</p>
+        </div>
+
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">01</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">General Consultation</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Assessment and treatment for common illnesses such as fever, cough, flu, headaches, stomach discomfort and minor infections.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">02</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Health Screening</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Routine health checks and screening packages to help identify health risks early and support preventive care.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">03</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Vaccinations</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Selected routine and travel vaccinations for suitable patients after assessment by our medical team.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">04</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Chronic Disease Care</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Ongoing monitoring and follow-up for conditions such as diabetes, high blood pressure and high cholesterol.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">05</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Minor Procedures</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Basic in-clinic procedures such as wound care and dressing, subject to the doctor's assessment of the patient's condition.</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 font-bold text-teal-800">06</div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900">Family &amp; Preventive Care</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Preventive advice, lifestyle guidance and age-appropriate healthcare support for individuals and families.</p>
+            </article>
+        </div>
+    </section>
+
+    <section>
+        <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-teal-700">APPOINTMENTS</p>
+            <h2 class="mt-3 text-3xl font-bold text-slate-900">How booking works</h2>
+        </div>
+
+        <div class="mt-8 grid gap-5 sm:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                <span class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 font-bold text-white">1</span>
+                <h3 class="mt-4 font-bold text-slate-900">Choose your service</h3>
+                <p class="mt-2 text-sm text-slate-600">Select the type of consultation or care that you require.</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                <span class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 font-bold text-white">2</span>
+                <h3 class="mt-4 font-bold text-slate-900">Select a doctor and time</h3>
+                <p class="mt-2 text-sm text-slate-600">View the doctor's schedule and choose an available appointment slot.</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+                <span class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 font-bold text-white">3</span>
+                <h3 class="mt-4 font-bold text-slate-900">Confirm your appointment</h3>
+                <p class="mt-2 text-sm text-slate-600">Complete your booking details and receive confirmation of your appointment.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
