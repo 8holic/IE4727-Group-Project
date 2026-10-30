@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+  <main class="page">
+    <section class="booking-form">
+      <p class="eyebrow">PATIENT ACCOUNT</p>
+      <h1 class="text-2xl font-bold text-slate-900">Edit Profile</h1>
+      <p>Update your personal details below.</p>
+
+<% if (message !== '') { %>
+      <p class="form-msg <%= messageClass %>"><%= message %></p>
+<% } %>
+
+      <form method="post" action="/edit-profile">
+        <input type="hidden" name="csrf" value="<%= csrfToken %>">
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" minlength="2" maxlength="100"
+               autocomplete="name" required value="<%= patient.name %>">
+        <span class="input-error" data-error="Please enter your full name."></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="<%= patient.email %>" readonly
+               class="bg-slate-100 text-slate-500 cursor-not-allowed">
+        <small class="mt-1 block text-xs text-slate-500">Email is used for login and cannot be changed here.</small>
+
+        <label for="phone">Phone (+65):</label>
+        <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel"
+               pattern="(?:\+?65)?[\s\-]?[89][0-9]{3}[\s\-]?[0-9]{4}"
+               placeholder="+65 9123 4567"
+               title="Enter an 8-digit Singapore mobile number starting with 8 or 9."
+               required value="<%= patient.phone %>">
+        <span class="input-error" data-error="Please enter a valid Singapore mobile number."></span>
+
+        <button type="submit">Save Changes</button>
+
+        <a class="mt-4 inline-block text-sm font-semibold text-teal-700 hover:underline" href="/my-appointments">Back to My Appointments</a>
+      </form>
+    </section>
+  </main>
+
+<%- include('partials/footer') %>

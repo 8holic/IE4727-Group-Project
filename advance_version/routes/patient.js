@@ -407,6 +407,112 @@ router.post('/manage', requirePatient('/my-appointments'), async (req, res) => {
   }
 });
 
+router.get('/edit-profile', requirePatient('/my-appointments'), async (req, res) => {
+  try {
+    const patient = await loadPatient(req.session.user.id);
+    if (!patient) {
+      return destroySession(req, res, '/login');
+    }
+
+    return res.render('edit-profile', {
+      title: 'Edit Profile',
+      active: 'appointments',
+      patient,
+      message: '',
+      messageClass: '',
+    });
+  } catch (error) {
+    console.error('Edit profile page failed:', error.message);
+    return res.status(500).send('Could not load your profile. Please try again.');
+  }
+});
+
+router.post('/edit-profile', requirePatient('/my-appointments'), async (req, res) => {
+  let patient;
+
+  try {
+    patient = await loadPatient(req.session.user.id);
+  } catch (error) {
+    console.error('Edit profile page failed:', error.message);
+    return res.status(500).send('Could not load your profile. Please try again.');
+  }
+
+  if (!patient) {
+    return destroySession(req, res, '/login');
+  }
+
+  const name = String(req.body.name || '').trim();
+  const phone = String(req.body.phone || '').trim();
+  let message = '';
+  let messageClass = '';
+
+  if (name === '') {
+    message = 'Please enter your full name.';
+    messageClass = 'error';
+  } else if (name.length < 2 || name.length > 100) {
+    message = 'Name must contain between 2 and 100 characters.';
+    messageClass = 'error';
+  } else if (phone === '') {
+    message = 'Please enter your mobile number.';
+    messageClass = 'error';
+  } else if (rules.validate_phone(phone) !== '') {
+    message = 'Please enter a valid Singapore mobile number.';
+    messageClass = 'error';
+  } else {
+    let conn;
+
+    try {
+      conn = await db.getConnection();
+      await conn.beginTransaction();
+      await conn.execute(
+        'UPDATE patients SET name = ?, phone = ? WHERE id = ?',
+        [name, phone, req.session.user.id]
+      );
+      await conn.execute(
+        'UPDATE appointments SET patient_name = ?, phone = ? WHERE patient_id = ?',
+        [name, phone, req.session.user.id]
+      );
+      await conn.commit();
+
+      req.session.user.name = name;
+      patient.name = name;
+      patient.phone = phone;
+
+      message = 'Profile updated successfully.';
+      messageClass = 'success';
+    } catch (error) {
+      if (conn) {
+        try {
+          await conn.rollback();
+        } catch (rollbackError) {
+          console.error('Profile rollback failed:', rollbackError.message);
+        }
+      }
+
+      console.error('Profile update failed:', error.message);
+      message = 'Profile could not be updated. Please try again.';
+      messageClass = 'error';
+    } finally {
+      if (conn) {
+        conn.release();
+      }
+    }
+  }
+
+  if (messageClass === 'error') {
+    patient.name = name;
+    patient.phone = phone;
+  }
+
+  return res.render('edit-profile', {
+    title: 'Edit Profile',
+    active: 'appointments',
+    patient,
+    message,
+    messageClass,
+  });
+});
+
 router.get('/cancel', requirePatient('/my-appointments'), async (req, res) => {
   const id = Number(req.query.id || 0);
 

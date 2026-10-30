@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 
 const config = require('./config');
+const site = require('./data/site.json');
 const rules = require('./lib/rules');
 const { csrfToken, csrfOk } = require('./lib/auth');
 const { dateLabel, timeLabel12, dateTimeLabel, isFuture } = require('./lib/format');
@@ -22,6 +23,12 @@ app.locals.timeLabel12 = timeLabel12;
 app.locals.dateTimeLabel = dateTimeLabel;
 app.locals.isFuture = isFuture;
 app.locals.timeLabel = rules.time_label;
+app.locals.site = site;
+
+app.get('/', (req, res) => res.render('index', { title: 'Home', active: 'home' }));
+app.get('/about', (req, res) => res.render('about', { title: 'About Us', active: 'about' }));
+app.get('/service', (req, res) => res.render('service', { title: 'Services', active: 'service' }));
+app.get('/location', (req, res) => res.render('location', { title: 'Location', active: 'location' }));
 
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 app.use(express.urlencoded({ extended: false }));
@@ -52,11 +59,16 @@ app.use((req, res, next) => {
 });
 
 const routeAliases = {
+  '/index.html': '/',
+  '/about.html': '/about',
+  '/service.html': '/service',
+  '/location.html': '/location',
   '/login.php': '/login',
   '/register.php': '/register',
   '/logout.php': '/logout',
   '/booking.php': '/booking',
   '/my_appointments.php': '/my-appointments',
+  '/edit_profile.php': '/edit-profile',
   '/manage.php': '/manage',
   '/cancel.php': '/cancel',
   '/confirmation.php': '/confirmation',

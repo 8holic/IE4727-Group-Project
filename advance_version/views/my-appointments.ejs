@@ -6,6 +6,7 @@
         <p class="eyebrow">PATIENT ACCOUNT</p>
         <h1>My Appointments</h1>
         <p>Logged in as <%= currentUser.name %>.</p>
+        <a class="mt-2 inline-flex items-center rounded-lg bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-800 transition hover:bg-slate-100" href="/edit-profile">Edit Profile</a>
       </div>
       <a class="book-now" href="/booking">New Appointment</a>
     </div>
@@ -31,8 +32,8 @@
             <td><span class="status status-<%= row.status %>"><%= row.status %></span></td>
             <td>
 <% if (row.status === 'booked' && isFuture(row.slot_start)) { %>
-              <a href="/manage?id=<%= row.id %>">Reschedule</a> |
-              <a href="/cancel?id=<%= row.id %>">Cancel</a>
+              <a class="font-semibold text-teal-700 hover:underline" href="/manage?id=<%= row.id %>">Reschedule</a> |
+              <a class="font-semibold text-rose-700 hover:underline" href="/cancel?id=<%= row.id %>">Cancel</a>
 <% } else { %>
               —
 <% } %>

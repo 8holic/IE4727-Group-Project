@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> | J&amp;B Family Clinic</title>
-  <link rel="stylesheet" href="/style.css">
+  <title><%= title %> | <%= site.brand.name %></title>
+  <link rel="stylesheet" href="/assets/tailwind.css">
 </head>
-<body>
-  <header class="top-header">
-    <a class="logo-link" href="/" aria-label="J&B Family Clinic Home">
-      <img class="clinic-logo" src="/assets/logo.png" alt="J&B Family Clinic logo">
-    </a>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <a href="<%= site.brand.home %>" class="flex shrink-0 items-center gap-3">
+        <img src="<%= site.brand.logo %>" alt="<%= site.brand.alt %>" class="h-12 w-auto sm:h-14">
+      </a>
 
-    <nav class="top-nav" aria-label="Main navigation">
-      <ul>
-        <li><a class="<%= active === 'home' ? 'active' : '' %>" href="/">Home</a></li>
-        <li><a class="<%= active === 'about' ? 'active' : '' %>" href="/about">About Us</a></li>
-        <li><a class="<%= active === 'service' ? 'active' : '' %>" href="/service">Services</a></li>
-        <li><a class="<%= active === 'location' ? 'active' : '' %>" href="/location">Location</a></li>
-        <li><a class="<%= active === 'appointments' ? 'active' : '' %>" href="/my-appointments">My Appointments</a></li>
-        <li><a class="<%= active === 'login' ? 'active' : '' %>" href="/login">Patient Login</a></li>
-        <li><a class="<%= active === 'staff' ? 'active' : '' %>" href="/staff">Employee Login</a></li>
-        <li><a class="book-now" href="/booking">Book Now</a></li>
-      </ul>
-    </nav>
+      <nav aria-label="Main navigation" class="flex min-w-0 flex-1 items-center justify-end gap-1 overflow-x-auto">
+<% site.nav.forEach((item) => { %>
+<% const isActive = active === item.key; %>
+        <a href="<%= item.href %>"<% if (isActive) { %> aria-current="page"<% } %>
+           class="whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition <%= isActive ? 'bg-teal-50 text-teal-800' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' %>">
+          <%= item.label %>
+        </a>
+<% }) %>
+        <a href="<%= site.cta.href %>" class="ml-2 whitespace-nowrap rounded-full bg-rose-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-rose-700">
+          <%= site.cta.label %>
+        </a>
+      </nav>
+    </div>
   </header>

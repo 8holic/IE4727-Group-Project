@@ -1,0 +1,30 @@
+{
+  "brand": {
+    "name": "J&B Family Clinic",
+    "home": "/",
+    "logo": "/assets/logo.png",
+    "alt": "J&B Family Clinic logo"
+  },
+  "nav": [
+    { "key": "home", "label": "Home", "href": "/" },
+    { "key": "about", "label": "About Us", "href": "/about" },
+    { "key": "service", "label": "Services", "href": "/service" },
+    { "key": "location", "label": "Location", "href": "/location" },
+    { "key": "appointments", "label": "My Appointments", "href": "/my-appointments" },
+    { "key": "login", "label": "Patient Login", "href": "/login" },
+    { "key": "staff", "label": "Employee Login", "href": "/staff" }
+  ],
+  "cta": {
+    "label": "Book Now",
+    "href": "/booking"
+  },
+  "footer": {
+    "address": "65 Jurong West, Fictional Singapore Mall, #02-14 Singapore 123456",
+    "hours": "Mon-Fri 9:00 AM-6:00 PM · Sat 9:00 AM-6:00 PM · Closed Sundays",
+    "links": [
+      { "label": "Book an appointment", "href": "/booking" },
+      { "label": "Patient login", "href": "/login" },
+      { "label": "Employee login", "href": "/staff" }
+    ]
+  }
+}
