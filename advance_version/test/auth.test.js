@@ -7,6 +7,8 @@ const DEMO_HASH = '$2y$10$bZyjLPb/bnoHIAvo2vCy/OEaS2N0iTudfw4gfh/G1uzHfTxZZbTou'
 test('allowedNext only allows known internal pages', () => {
   assert.equal(allowedNext('/booking'), '/booking');
   assert.equal(allowedNext('/my-appointments'), '/my-appointments');
+  assert.equal(allowedNext('/edit-profile'), '/edit-profile');
+  assert.equal(allowedNext('/change-password'), '/change-password');
   assert.equal(allowedNext('/'), '/');
   assert.equal(allowedNext('https://evil.example'), '/');
   assert.equal(allowedNext('//evil.example'), '/');

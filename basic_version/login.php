@@ -19,8 +19,8 @@ if (isset($_GET['registered'])) {
 } elseif ($required && $next === 'booking.php') {
     $message = 'Please sign in or create an account to book an appointment.';
     $messageClass = 'info';
-} elseif ($required && $next === 'my_appointments.php') {
-    $message = 'Please sign in to view or manage your appointments.';
+} elseif ($required && in_array($next, ['my_appointments.php', 'edit_profile.php', 'change_password.php'], true)) {
+    $message = 'Please sign in to manage your patient account.';
     $messageClass = 'info';
 }
 

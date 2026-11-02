@@ -108,8 +108,8 @@ router.get('/login', (req, res) => {
   } else if (required && next === '/booking') {
     message = 'Please sign in or create an account to book an appointment.';
     messageClass = 'info';
-  } else if (required && next === '/my-appointments') {
-    message = 'Please sign in to view or manage your appointments.';
+  } else if (required && ['/my-appointments', '/edit-profile', '/change-password'].includes(next)) {
+    message = 'Please sign in to manage your patient account.';
     messageClass = 'info';
   }
 

@@ -2,7 +2,7 @@ const express = require('express');
 const crypto = require('crypto');
 const db = require('../lib/db');
 const rules = require('../lib/rules');
-const { requirePatient, destroySession } = require('../lib/auth');
+const { requirePatient, destroySession, comparePassword, hashPassword } = require('../lib/auth');
 const { isFuture } = require('../lib/format');
 const {
   sendBookingEmail,
@@ -511,6 +511,72 @@ router.post('/edit-profile', requirePatient('/my-appointments'), async (req, res
     message,
     messageClass,
   });
+});
+
+
+router.get('/change-password', requirePatient('/change-password'), (req, res) => {
+  return res.render('change-password', {
+    title: 'Change Password',
+    active: 'appointments',
+    message: '',
+    messageClass: '',
+  });
+});
+
+router.post('/change-password', requirePatient('/change-password'), async (req, res) => {
+  const currentPassword = typeof req.body.current_password === 'string' ? req.body.current_password : '';
+  const newPassword = typeof req.body.new_password === 'string' ? req.body.new_password : '';
+  const confirmPassword = typeof req.body.confirm_password === 'string' ? req.body.confirm_password : '';
+
+  const render = (message, messageClass) => res.render('change-password', {
+    title: 'Change Password',
+    active: 'appointments',
+    message,
+    messageClass,
+  });
+
+  if (currentPassword === '' || newPassword === '' || confirmPassword === '') {
+    return render('Please complete all password fields.', 'error');
+  }
+
+  if (newPassword.length < 8) {
+    return render('New password must be at least 8 characters.', 'error');
+  }
+
+  if (newPassword !== confirmPassword) {
+    return render('New password and confirmation do not match.', 'error');
+  }
+
+  try {
+    const [rows] = await db.execute(
+      'SELECT password_hash FROM patients WHERE id = ?',
+      [req.session.user.id]
+    );
+    const patient = rows[0];
+
+    if (!patient) {
+      return destroySession(req, res, '/login');
+    }
+
+    if (!await comparePassword(currentPassword, patient.password_hash)) {
+      return render('Your current password is incorrect.', 'error');
+    }
+
+    if (await comparePassword(newPassword, patient.password_hash)) {
+      return render('New password must be different from your current password.', 'error');
+    }
+
+    const newHash = await hashPassword(newPassword);
+    await db.execute(
+      'UPDATE patients SET password_hash = ? WHERE id = ?',
+      [newHash, req.session.user.id]
+    );
+
+    return render('Password changed successfully.', 'success');
+  } catch (error) {
+    console.error('Patient password change failed:', error.message);
+    return render('Password could not be changed. Please try again.', 'error');
+  }
 });
 
 router.get('/cancel', requirePatient('/my-appointments'), async (req, res) => {

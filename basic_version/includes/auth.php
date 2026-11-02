@@ -13,7 +13,7 @@ function is_patient() {
 }
 
 function allowed_next($next) {
-    $allowed = ['booking.php', 'my_appointments.php'];
+    $allowed = ['booking.php', 'my_appointments.php', 'edit_profile.php', 'change_password.php'];
     return in_array($next, $allowed, true) ? $next : 'my_appointments.php';
 }
 

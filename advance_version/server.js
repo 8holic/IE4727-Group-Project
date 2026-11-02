@@ -69,6 +69,8 @@ const routeAliases = {
   '/booking.php': '/booking',
   '/my_appointments.php': '/my-appointments',
   '/edit_profile.php': '/edit-profile',
+  '/change_password.php': '/change-password',
+  '/employee_change_password.php': '/staff/change-password',
   '/manage.php': '/manage',
   '/cancel.php': '/cancel',
   '/confirmation.php': '/confirmation',

@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
-const ALLOWED_NEXT = ['/', '/booking', '/my-appointments'];
+const ALLOWED_NEXT = ['/', '/booking', '/my-appointments', '/edit-profile', '/change-password'];
 
 function isLoggedIn(req) {
   return Boolean(req.session && req.session.user && req.session.user.role);

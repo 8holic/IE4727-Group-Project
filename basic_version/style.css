@@ -828,3 +828,38 @@ body {
 .profile-back-link:hover {
   text-decoration: underline;
 }
+
+/* =========================================================
+   ACCOUNT PASSWORD ACTIONS
+   ========================================================= */
+.account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.account-actions .edit-profile-btn {
+  margin-top: 0;
+}
+
+.password-form {
+  max-width: 650px;
+  margin: 40px auto;
+}
+
+.staff-account-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid #28786f;
+  border-radius: 999px;
+  background: #fff;
+  color: #28786f;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.staff-account-link:hover {
+  background: #eef8f6;
+}

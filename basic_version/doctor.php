@@ -330,6 +330,7 @@ for ($hour = $openHour; $hour <= $closeHour; $hour++) {
 
     <div class="staff-bar">
       <span>Signed in as <?= h($_SESSION['doctor_name'] ?? '') ?></span>
+      <a class="staff-account-link" href="employee_change_password.php">Change Password</a>
       <a class="book-now" href="doctor.php?logout=1">Log out</a>
     </div>
   </header>
